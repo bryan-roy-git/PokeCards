@@ -13,24 +13,24 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-        $table->id();
-        $table->string('nick');
-        $table->string('email')->unique();
-        $table->string('password');
-        $table->string('image')->nullable();
-        $table->integer('wins')->default('0');
-        $table->integer('loses')->default('0');
-        $table->integer('game_played')->default('0');
-        $table->string('pokemons')->nullable();
-        $table->string('decks')->nullable();
-        $table->string('main_deck')->nullable();
-        $table->integer('coins')->default('0');
-        $table->string('cart')->nullable();
-        $table->string('turn')->nullable();
-        $table->dateTime('created_at');
-        $table->dateTime('updated_at');
-        });
+        // Schema::create('users', function (Blueprint $table) {
+        // $table->id();
+        // $table->string('nick');
+        // $table->string('email')->unique();
+        // $table->string('password');
+        // $table->string('image')->nullable();
+        // $table->integer('wins')->default('0');
+        // $table->integer('loses')->default('0');
+        // $table->integer('game_played')->default('0');
+        // $table->string('pokemons')->nullable();
+        // $table->string('decks')->nullable();
+        // $table->string('main_deck')->nullable();
+        // $table->integer('coins')->default('0');
+        // $table->string('cart')->nullable();
+        // $table->string('turn')->nullable();
+        // $table->dateTime('created_at');
+        // $table->dateTime('updated_at');
+        // });
     }
 
     /**
