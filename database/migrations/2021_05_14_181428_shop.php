@@ -23,7 +23,7 @@ class Shop extends Migration
             $table->dateTime('updated_at');
             // $table->foreign('user_id')->references('id')->on('users');
             
-        // });
+         });
     }
 
     /**
