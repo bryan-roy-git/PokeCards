@@ -12,9 +12,22 @@ class GamesOfflineController extends Controller
     public function getGamesOff(){
         $id_user=\Auth::user()->id;
         $gmoff = GamesOffline::where('user_id', $id_user)->get();
-    
-        // dd($gmoff);
-        return $gmoff;
+        if (count($gmoff) > 0){
+            for ( $x=0; $x < count($gmoff); $x++ ){
+                if ($gmoff[$x]->rewards != null ){
+                    $gmoff[$x]->pokemon_op;
+                    $gmoff[$x]->pokemon_player;
+                    $gmoff[$x]->rewards = "Si";
+                }else{
+                    $gmoff[$x]->pokemon_op;
+                    $gmoff[$x]->pokemon_player;
+                    $gmoff[$x]->rewards = "No";
+                }
+            }
+            return $gmoff;
+        }else{
+            return $gmoff;
+        }
     }
 
 }

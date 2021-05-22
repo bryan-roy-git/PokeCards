@@ -1,8 +1,8 @@
 <template>
-<div class="contianer">
-    <h1>Mis compras</h1>
+<div class="myshop">
+    <div class="chooseArea">MY SHOPPING RECORDS</div>
     <!-- {{pedidos}} -->
-    <table class="table table-hover">
+    <table class="table table-hover table-dark">
         
             <thead>
                 <tr>
@@ -16,7 +16,8 @@
                 <tbody  v-for="pedido in pedidos" :key="pedido.id">
                     <tr>
                         <th scope="row">{{pedido.id}}</th>
-                        <td>{{pedido.pokemon.name}}</td>
+                        <!-- <td>{{pedido.pokemon.name}}</td> -->
+                        <td><img class="poke_icon" :src="pedido.pokemon.image_path" alt=""></td>
                         <td>{{pedido.created_at}}</td>
                         <td>{{pedido.price}}</td>
                     </tr>
@@ -44,15 +45,17 @@
                 // this.$awn.asyncBlock(fetch('/api/pokemon?page='+this.currentPage)
                 await axios.get('/api/user/getMyShops')
                 .then(response => {
-                    console.log(response.data,"MYS COMPRAS")
+                    // console.log(response,"MYS COMPRAS")
+                    // console.log(response.data,"MYS COMPRAS")
                     this.pedidos = response.data;
                     })
+
                 for ( let x=0; x<this.pedidos.length; x++ ) {
                     var date = new Date(this.pedidos[x].created_at);
                     // console.log(f)
                     this.pedidos[x].created_at = date.toDateString()
                     // this.pedidos[x].created_at = date.toDateString()+' - '+date.toLocaleTimeString()
-                    console.log(date.toDateString(),' - ', date.toLocaleTimeString())
+                    // console.log(date.toDateString(),' - ', date.toLocaleTimeString())
 
                 }
     
@@ -61,17 +64,14 @@
 
     }
 </script>
-<style>
-.tienda{
-    display: flex;
-    width: 100%;
+<style scoped>
+.myshop{
+    color: white;
 }
 
-.container{
-    width: 70%;
-}
-.baul{
-    background: rgb(176, 138, 42) !important;
-    width: 30%;
+
+.poke_icon{
+    width: 50px;
+    height: 50px;
 }
 </style>

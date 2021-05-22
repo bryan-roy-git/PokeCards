@@ -46,46 +46,12 @@ class UserController extends Controller{
         }
 
         $poke_array = serialize($pokemons);
-        if (count($pokemons)<5){
-            $poke= DB::table('users')
-            ->where('id',$id)
-            ->update(['pokemons' => $poke_array, 'main_deck' => $poke_array]);
-        } else {
             $poke= DB::table('users')
             ->where('id',$id)
             ->update(['pokemons' => $poke_array]);
-        }
+        
 
         return $poke;
-    }
-
-    public function getDeck(Request $request){
-        $id=\Auth::user()->id;
-        $user=User::where('id',$id)->first();
-        $pokemons=[];
-        $main_deck= unserialize($user->main_deck);
-        
-        for ($i=0; $i < count($main_deck); $i++) { 
-            $pokemon = Pokemon::where('id', $main_deck[$i])->first();
-
-            $pokemon->moves= unserialize($pokemon->moves);
-            $moves=$pokemon->moves;
-    
-            $strjson = '[';
-            for ($j=0; $j < count($moves); $j++) { 
-                $strjson .= $moves[$j];
-                if($j < count($moves)-1) $strjson .= ', ';
-            }
-            $strjson .= ']';
-        
-            $pokemon->moves=json_decode($strjson);
-            array_push($pokemons, $pokemon);
-            //error_log($i);
-        }  
-
-        //dd($pokemons);
-        return $pokemons;
-
     }
 
     public function setRewards(Request $request){
@@ -95,8 +61,10 @@ class UserController extends Controller{
 
         $gmOff = new GamesOffline();
         // dd($gmOff);
-        
+       
         $gmOff->user_id = $id;
+        $gmOff->poke_player = $request->poke_player;
+        $gmOff->poke_op = $request->poke_op;
         $gmOff->wins = $request->wins;
         $pokemons= unserialize($user->pokemons);
         error_log($request->coins);
@@ -124,6 +92,7 @@ class UserController extends Controller{
             ->where('id',$id)
             ->update(['pokemons' => $poke_array]); 
         }
+        
         $gmOff->save();
         // return $user;
     }
@@ -139,6 +108,7 @@ class UserController extends Controller{
         // $res = $user->coins -= 1;
         // dd($user);
         $user->save();
+      
         return $res;
 
     }

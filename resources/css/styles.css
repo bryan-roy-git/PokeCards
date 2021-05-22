@@ -1,4 +1,4 @@
-form{
+.form{
     text-align: center;
     border:solid 3px black;
     border-radius: 1vh;
@@ -15,10 +15,4 @@ form{
 margin-top: 2vh;
 }
 
-.requirements{
-text-align: left;
-font-family: 'Times New Roman', Times, serif;
-font-size: 1.6vh;
-}
-  
   

@@ -3,7 +3,7 @@
 <body>
 <div id="ChangeForm">
 	<div class="container0">
-  	 <form @submit.prevent="changeNick">
+  	 <form class="form" @submit.prevent="changeNick">
         <div v-if="message.length > 0" class="alert alert-danger" role="alert">
             {{ message }}
         </div>
@@ -19,7 +19,7 @@
         </form>
 	</div>
  	<div class="newUser">
-        <form @submit.prevent="changeEmail" >
+        <form class="form" @submit.prevent="changeEmail" >
         <div v-if="emessage.length > 0" class="alert alert-danger" role="alert">
             {{ emessage }}
         </div>
@@ -161,6 +161,7 @@ export default {
 
 <style scoped>
 	#ChangeForm{
+
 	background-color: #f6f7c7;
 	display: block;
 	width: 100%;

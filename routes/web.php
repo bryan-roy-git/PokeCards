@@ -31,6 +31,7 @@ Route::get('/profile', [App\Http\Controllers\web\WebController::class, 'index'])
 Route::get('/shop', [App\Http\Controllers\web\WebController::class, 'index'])->name('shop');
 Route::get('/myshops', [App\Http\Controllers\web\WebController::class, 'index'])->name('myshops');
 Route::get('/myGamesOff', [App\Http\Controllers\web\WebController::class, 'index'])->name('myshops');
+Route::get('/decks', [App\Http\Controllers\web\WebController::class, 'index'])->name('myshops');
 
 Route::get('/changeAvatar', [App\Http\Controllers\web\WebController::class, 'index'])->name('avatar');
 Route::get('/changePass', [App\Http\Controllers\web\WebController::class, 'index'])->name('changePass');

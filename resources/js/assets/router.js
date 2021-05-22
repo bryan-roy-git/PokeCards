@@ -19,6 +19,7 @@ import MyShops from '../components/MyShopComponent';
 import MyGamesOff from '../components/MyGamesOffComponent';
 import ChangePass from '../components/ChangePass';
 import ChangeProfile from '../components/ChangeProfile';
+import Decks from '../components/MiMazo';
 
 
 
@@ -46,6 +47,7 @@ const router = new VueRouter({
         { path: '/shop', name: 'shop', component: Shop,  meta: { requiresAuth: true } },
         { path: '/myshops', name: 'myshops', component: MyShops,  meta: { requiresAuth: true } },
         { path: '/myGamesOff', name: 'myGamesOff', component: MyGamesOff,  meta: { requiresAuth: true } },
+        { path: '/decks', name: 'decks', component: Decks,  meta: { requiresAuth: true } },
 
         { path: '/changeAvatar', name: 'avatar', component: Avatar,  meta: { requiresAuth: true } },
         { path: '/changePass', name: 'changePass', component: ChangePass,  meta: { requiresAuth: true }},

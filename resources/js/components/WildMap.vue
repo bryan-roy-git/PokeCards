@@ -31,23 +31,24 @@
                 <div @click="selectAttack(4)" class="option-4"> {{player.current.moves[3].name}}</div>
                 
             </div>
-             <div v-if="disabledOptions" id="battleOptions">
+            <div v-if="disabledOptions" id="battleOptions">
             </div>    
       </div>
     </div>
   </div> 
 
   <div  v-if="changing" class="deck">
+        <div class="change-poke-text">
+      {{changeText}}
+    </div>
     <div v-for="poke in player.poke" :key="poke.id" class="squad">
-        <div @click="changedCard(poke.id)">
+        <div @click="changedCard(poke.i)">
           <Card :HP="poke.hp" :maxHP="poke.maxHP" :Name="poke.name" :ATK="poke.atk" :DEF="poke.def" 
           :SPD="poke.spd" :Type="poke.type" :Level="poke.level" :HPBar="poke.HPBar" :Player="player" :Img="poke.image_path">
           </Card>
         </div>
     </div>
-    <div class="change-poke-text">
-      {{changeText}}
-    </div>
+
     <br>
     <div class="goback">
       <button class="back" @click="goBack()">Go Back</button>
@@ -105,7 +106,6 @@ export default {
         opmaxedHP:false,
         opmaxedATK:false,
         opmaxedDEF:false,
-
         wins:false,
         //maxedSPD:false,
 
@@ -118,25 +118,34 @@ mounted() {
   this.MapBackground=  this.MapPath+this.map+ '.jpg';
   this.getDeck()   
   this.getOpponent()
+  // console(this.player.poke)
      
 },
 
 methods: {
 
 async getDeck(){
-  let Deck = await axios.post('/api/getDeck')
-  this.player.cards=Deck.data.length;
-  console.log(Deck.data)
+  let Deck = await axios.get('/api/getMainDeck')
+  var count = 0
   for (let i = 0; i < Deck.data.length; i++) {
-    var pokemon=Deck.data[i]
-    Vue.set(pokemon, "HPBar", {width: '100%'})
-    Vue.set(pokemon, "id", i)
-    Vue.set(pokemon, "maxHP",  Deck.data[i].hp)
-    Vue.set(pokemon, "HPlimit", Deck.data[i].hp*1.2)
-    Vue.set(pokemon, "maxATK",  Deck.data[i].atk*1.2)
-    Vue.set(pokemon, "maxDEF",  Deck.data[i].def*1.2)
-    //Vue.set(pokemon, "maxSPD",  Deck.data[i].spd*1.5)
-    this.player.poke.push(pokemon)
+    if (Deck.data[i].id == 152){
+      // console.log("NO EXISTE",i)
+    }else{
+      
+      var pokemon=Deck.data[i]
+      Vue.set(pokemon, "HPBar", {width: '100%'})
+      Vue.set(pokemon, "i", count )
+      Vue.set(pokemon, "id", Deck.data[i].id)
+      Vue.set(pokemon, "maxHP",  Deck.data[i].hp)
+      Vue.set(pokemon, "HPlimit", Deck.data[i].hp*1.2)
+      Vue.set(pokemon, "maxATK",  Deck.data[i].atk*1.2)
+      Vue.set(pokemon, "maxDEF",  Deck.data[i].def*1.2)
+      //Vue.set(pokemon, "maxSPD",  Deck.data[i].spd*1.5)
+      this.player.poke.push(pokemon)
+      count += 1
+    }
+     this.player.cards=count;
+
   }
   //console.log(this.player.poke)
 
@@ -169,7 +178,7 @@ goBack(){
 },
 
 changedCard(num){
-    
+  
   if (this.player.poke[num].id == this.player.current.id && this.player.poke[num].hp!=0){
       this.changeText='You are already using '+this.player.current.name+'!'
       this.timeOut=setTimeout(() => {this.changeText = "Who will you choose?"}, 2000);
@@ -205,11 +214,11 @@ faintAnimation: function(){
       this.matchEnded = true; 
       setTimeout(() => {this.battleText = "You have no more cards left!"},2000)
       setTimeout(() => { this.$router.push('../adventure')},4000)
-      this.setRewards(this.opponent.poke.id)
+      this.setRewards(this.opponent.poke.id,this.player.current.id)
   } else if (this.opponent.cards==0){
         this.wins = true
         this.matchEnded = true; 
-        this.setRewards(this.opponent.poke.id)
+        this.setRewards(this.opponent.poke.id, this.player.current.id)
         console.log(this.coins)
         if (this.droppedPokemon != null){
            setTimeout(() => {this.battleText = "You have won "+this.coins+" PokeCoins and obtained "+this.opponent.poke.name},2000)
@@ -226,15 +235,16 @@ faintAnimation: function(){
         
 },
 
-async setRewards(id){
+async setRewards(op_id, player_id){
     if (this.wins){
     console.log(" WINS")
     var min = Math.ceil(0);
     var max = Math.floor(100);
     var chance= Math.floor(Math.random() * (max - min) + min);
-    
+    console.log(this.player.current, "player idddddddddddddddddd")
     if (chance <= 90 ){
-      this.droppedPokemon=id.toString()
+      this.droppedPokemon=op_id.toString()
+  
     }
     console.log(this.opponent.poke)
     if (this.opponent.poke.rarity=="common"){
@@ -257,7 +267,10 @@ async setRewards(id){
     } else{
         await axios.post('../api/setRewards', {
             coins: this.coins,
-            droppedPokemon: this.droppedPokemon
+            droppedPokemon: this.droppedPokemon,
+            poke_player: player_id,
+            poke_op: this.droppedPokemon,
+            wins: 1
         })
       }
     }
@@ -265,7 +278,9 @@ async setRewards(id){
       console.log("LOSS")
       const info = await axios.post('../api/setRewards', {
           coins: 100,
-          wins: 0
+          wins: 0,
+          poke_player: player_id,
+          poke_op: op_id
           // droppedPokemon: this.droppedPokemon
       })
     }
@@ -423,7 +438,7 @@ opponentAttack(){
              
              if (opponentSkill=="ATK" && this.opmaxedATK || opponentSkill=="DEF" && this.opmaxedDEF || opponentSkill=="HP" && this.opmaxedHP ){
                   this.battleText = this.opponent.poke.name + " used " + this.opponent.poke.moves[random-1].name + "!"
-                  setTimeout(() => {this.battleText = this.opponent.poke.name + " can't increase his "+ skill+"anymore!"}, 2000)
+                  setTimeout(() => {this.battleText = this.opponent.poke.name + " can't increase his "+ opponentSkill+"anymore!"}, 2000)
                   setTimeout(() => { this.options = true, this.disabledOptions = false},4000)
                   setTimeout(() => {this.battleText = "What will " + this.player.current.name + " do?"},4000)  
               } else{

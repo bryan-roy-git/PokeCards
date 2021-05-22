@@ -2,7 +2,7 @@
 <body>
 <div id="LoginForm">
     <div class="container0">
-      <form @submit.prevent="login">
+      <form class="form" @submit.prevent="login">
           <div v-if="credentials.length > 0" class="alert alert-warning" role="alert">
               {{credentials}}
           </div>
@@ -32,7 +32,7 @@
           <p>New here? Register for free now!</p>
           <router-link to="register" class="goRegister">Create an account</router-link>
         </div>
-</div>
+    </div>
 </body>
 </template>
 
@@ -48,6 +48,12 @@ export default {
         },
         credentials: ""
     }),
+    computed:{
+        user_pokes: function () {
+            console.log(decksStore.state.pokes,"USERS POKES")
+            return decksStore.state.pokes
+        },
+    },
     methods: {
         async login () {
             try{
@@ -62,7 +68,8 @@ export default {
               if (res.data.pokemons == null){
                 return this.$router.push('starting');
               } else{
-                  return this.$router.push('home');
+                 this.$store.dispatch('getDecks')
+                  return this.$router.go('home');
               }
 
             }catch{
@@ -71,6 +78,10 @@ export default {
             }
         }
     },
+    mounted(){
+      this.$store.dispatch('showDeck')
+      this.$store.dispatch('showPokes')
+    }
 }
 </script>
 <style lang="scss">
@@ -84,11 +95,15 @@ export default {
 
     #LoginForm{
     background-color: #f6f7c7;
+    background-image: url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png),url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/151.png);
+    background-repeat: no-repeat;
+    background-position-x: left ,  right;
     display: block;
     width: 100%;
     overflow: auto;
     height:fit-content;
     text-align: center;
+    
     
   }
 
@@ -106,6 +121,7 @@ export default {
     background-color: white;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 2vh;
   }
   
   .goRegister{
@@ -155,7 +171,9 @@ export default {
     align-items: center;
     justify-content: center;
     background-color:#f1f1f1;
-    margin-top: 2vh;
+    position: relative;
+    top:5px;
+   
   }
   
   button {

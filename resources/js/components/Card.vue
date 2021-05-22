@@ -1,7 +1,7 @@
 <template>
         <div class="contenedor" @click="FlipMe">
             <div v-if="notFlipped" class="card carta" :style="cardColor">
-                <span class="player-level">Lvl. {{Level}}</span>
+                <!-- <span class="player-level">Lvl. {{Level}}</span> -->
                 <div class="hp-bar">
                     <div v-if="Player" :style="HPStyle" class="hp-bar-fill-player"></div>
                     <div v-if="!Player" :style="HPStyle" class="hp-bar-fill-opponent"></div>
@@ -105,7 +105,7 @@ export default {
                     return  {"background-image": "linear-gradient(to top left, white, #009933 , white )"}
                 }
                 else if (this.Rarity=="superrare"){
-                    return  {"background-image": "linear-gradient(to top left, white, #blue , white )"}
+                    return  {"background-image": "linear-gradient(to top left, white, blue , white )"}
                 }
                 else if (this.Rarity=="unique"){
                      return  {"background-image": "linear-gradient(to top left, white, #cc00cc, white )"}

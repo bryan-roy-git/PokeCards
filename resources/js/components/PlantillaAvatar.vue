@@ -6,10 +6,10 @@
         <input type="radio" name="navegacion" id="_2" value="Aura.webp" v-on:click="pas_name('Aura.webp')">
         <input type="radio" name="navegacion" id="_3" value="Bruno.webp" v-on:click="pas_name('Bruno.webp')">
         <input type="radio" name="navegacion" id="_4" value="Hoja.webp" v-on:click="pas_name('Hoja.webp')"> 
-        <img :src="'../../../storage/Usul.webp'" width="230" height="300" alt="Galeria CSS 1" />
-        <img :src="'../../../storage/Aura.webp'" width="230" height="300" alt="Galeria CSS 2"  />
-        <img :src="'../../../storage/Bruno.webp'" width="230" height="300" alt="Galeria CSS 3" />
-        <img :src="'../../../storage/Hoja.webp'" width="230" height="300" alt="Galeria CSS 4" />
+        <img :src="route+'Usul.webp'" width="230" height="300" alt="Galeria CSS 1" />
+        <img :src="route+'Aura.webp'" width="230" height="300" alt="Galeria CSS 2"  />
+        <img :src="route+'Bruno.webp'" width="230" height="300" alt="Galeria CSS 3" />
+        <img :src="route+'Hoja.webp'" width="230" height="300" alt="Galeria CSS 4" />
     </div>
 </div>
 </template>
@@ -18,7 +18,8 @@ export default {
     data() {
         return {
           choose: false,
-          img_name: "Usul.webp"
+          img_name: "Usul.webp",
+          route:"/images/"
         }
     },
     methods: {

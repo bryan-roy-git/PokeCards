@@ -1,5 +1,8 @@
 <template>
+<div>
+<div class="chooseArea">POKESHOP</div>
 <div class="tienda">
+    
     <div class="container">
             <pokemon-component v-if="total > 0"
                 :pokemons="pokemons"
@@ -17,11 +20,12 @@
     </div>
  
 </div>
+</div>
 </template>
 
 <script>
 import PokemonComponent from './PokemonComponent';
-import BaulComponent from './BaulComponent';
+import BaulComponent from './Carrito';
     export default {
         components: { PokemonComponent, BaulComponent },
         
@@ -71,15 +75,19 @@ import BaulComponent from './BaulComponent';
 </script>
 <style scoped>
 .tienda{
+    color: white;
     display: flex;
     width: 100%;
 }
 
 .container{
+    border: 5px solid silver;
     width: 70%;
 }
 .baul{
-    background: rgb(176, 138, 42) !important;
+    border: 5px solid silver;
+    
+    background: #343a40 !important;
     width: 30%;
 }
 </style>

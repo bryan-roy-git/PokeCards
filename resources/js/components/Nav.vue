@@ -1,71 +1,86 @@
 <template>
 <div class="header">
-  <b-navbar class="navBar" toggleable="lg" type="light" variant="info">
-
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
   <img class="hi" alt="Pokelogo" src="/images/pokelogo.png" width="60" height="60">
-  
-  <router-link to="" class="link">
-    <h5 class="title"><b>PokeCards</b></h5>
-  </router-link>
+  <a class="navbar-brand" href="#"><b>PokeCards</b></a>
 
-    <b-navbar-toggle class="color" target="nav-collapse"/>
-    
-    <b-collapse id="nav-collapse" is-nav>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <b-navbar-nav class="ml-auto" v-if="$store.state.auth">
-      <b-nav-item href="#" right>
-        <router-link to="/home" active-class="active" class="bigger navindex">Home</router-link>
-      </b-nav-item>
-      
-      <b-nav-item href="#" right>
-        <router-link to="/adventure" active-class="active" class="bigger navindex">Adventure</router-link>
-      </b-nav-item>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto"  v-if="$store.state.auth">
+      <li class="nav-item ">
+          <router-link to="/home" active-class="active" class="nav-link">
+            <i class="fa fa-home"></i>
+              Home
+            <span class="sr-only">(current)</span>
+          </router-link>
+      </li>
+      <li class="nav-item">
+          <router-link to="/adventure" active-class="active" class="nav-link">
+            <i class="fa fa-dungeon"></i>
+             Adventure
+            <span class="sr-only">(current)</span>
+          </router-link>
+      </li>
+      <li class="nav-item">
+         
+          <router-link to="/decks" active-class="active" class="nav-link">
+          <i class="fa fa-book"></i>
+              Decks
+          </router-link>
+      </li>
 
-      <b-nav-item href="#" right>
-        <router-link to="/myshops" active-class="active" class="bigger navindex">My Shops</router-link>
-      </b-nav-item>
-
-      <b-nav-item href="#" right>
-        <router-link to="/myGamesOff" active-class="active" class="bigger navindex">My Games offline</router-link>
-      </b-nav-item>
-
-
-      
-        <div class="dropdown" >
-          <button class="btn dropdown-toggle navindex lower" type="button" active-class="active" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img :src="'/api/getAvatar'" style="max-width: 30px; max-height: 30px; min-width: 30px; min-height: 30px; border-radius: 50%; margin-right: 5px;">{{$store.state.user.nick}}
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <router-link to="/changeAvatar" class="dropdown-item navindex">Change Avatar</router-link>
-            <router-link class="dropdown-item navindex" to="/changeProfile" >Change Profile</router-link>
-            <router-link class="dropdown-item navindex" to="/changePass" >Change Password</router-link>
-            <a @click="Logout"  active-class="active" class="dropdown-item navindex">Logout</a>
-
-            <!-- <a class="dropdown-item navindex" href=""><a @click="Logout()" active-class="active" style="display: block;">Logout</a></a> -->
-          </div>
-        </div> 
-        
-      <b-nav-item href="#" right>
-        <router-link to="/shop">
-          <span class="fa-stack fa-2x has-badge" :data-count=pokemons_cart>
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-          </span>
+        <li class="nav-item">
+        <router-link to="/shop" active-class="active" class="nav-link" >
+           <i class="fa fa-shopping-cart fa-stack" :data-count="pokemons_cart" ></i>
+              Shop   
         </router-link>
-      </b-nav-item>
+      </li>
 
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="span nav-link"> 
+          <img :src="'/api/getAvatar'"  class="fa img">
+          {{$store.state.user.nick}}
+          </span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <router-link to="/changeAvatar" class="dropdown-item ">Change Avatar</router-link>
+            <router-link class="dropdown-item " to="/changeProfile" >Change Profile</router-link>
+            <router-link class="dropdown-item " to="/changePass" >Change Password</router-link>
+            <router-link to="/myshops" active-class="active" class="dropdown-item ">Shopping Records</router-link>
+            <router-link to="/myGamesOff" active-class="active" class="dropdown-item ">Adventure Records</router-link>
+          <div class="dropdown-divider"></div>
+           <a @click="Logout"  active-class="active" class="dropdown-item">Logout</a>
+        </div>
+      </li>
 
-    </b-navbar-nav>
-      <b-navbar-nav class="ml-auto" v-else>
-        <b-nav-item href="#" right>
-          <router-link to="/login" active-class="active" class="navindex ">Login</router-link>
-        </b-nav-item>
-        <b-nav-item href="#" right >
-          <router-link to="/register" active-class="active" class="navindex">Register</router-link>
-        </b-nav-item>
-      </b-navbar-nav>
-    </b-collapse>
-  </b-navbar>
+        <li class="nav-item">
+        <router-link to="#" active-class="active" class="nav-link" >
+           <i class="fa fa-ruble-sign"> </i>   
+            {{this.$store.state.user.coins}}
+        </router-link>
+      </li>
+
+    </ul>
+
+    <ul class="navbar-nav ml-auto" v-else>
+      <li class="nav-item">
+        <router-link to="/login" active-class="active" class="nav-link ">
+          Login
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/register" active-class="active" class="nav-link ">
+          Register
+        </router-link>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 </div>
 </template>
 
@@ -85,14 +100,12 @@ export default {
   },
   computed:{
     pokemons_cart: function () {
-        // cart.dispatch('fetcCart')
-        // this.cart=this.pokemons_cart
-        //console.log(cart.state.pokemons_cart,"computed_Baul")
+
         return cart.state.pokemons_cart.length
     },
   },
   mounted () {
-    // console.log(this.$store.state.user,"estoy aki")
+
     cart.dispatch('fetcCart')
 
     
@@ -104,6 +117,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
+.dropdown-menu{
+  margin:0;
+  padding:4px;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-size: 0.8rem;
+}
+
 $shopping-cart-red: #ce4217;
 
 .fa-stack[data-count]:after{
@@ -114,85 +135,139 @@ $shopping-cart-red: #ce4217;
   font-size:40%;
   padding:.6em;
   border-radius:999px;
-  line-height:.75em;
+  line-height:.4em;
   color: white;
   color:$shopping-cart-red;
   text-align:center;
-  min-width:2em;
-  font-weight:bold;
+  max-width:2em;
   background: white;
   border-style:solid;
-}
-.fa-circle {
-  color:#697f94;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
 
-.red-cart {
-	color: #697f94; background:white;
+.fa-stack{
+ height: 27px!important;
+ margin: 0 !important; padding:0!important
 }
 
-hr{
-    border-top: 1px solid black;
- }
 
-.color{
-  background: white !important;
+.img{
+  max-width: 30px; max-height: 30px; min-width: 30px; min-height: 30px; border-radius: 50%;
+  margin-right:6px;
 }
 
-.navindex{
-    position: relative !important;;
-    color: #000;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    border-radius: 1vh;
-    background: white;
-    text-decoration: none;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    min-width: 80px;
-    max-width: 300px;
+.navbar-icon-top .navbar-nav .nav-link > .fa {
+  position: relative;
+  width: 36px;
+  font-size: 24px;
+}
+
+.navbar-icon-top .navbar-nav .nav-link > .fa > .badge {
+  font-size: 0.75rem;
+  position: absolute;
+  right: 0;
+  font-family: sans-serif;
+}
+
+.navbar-icon-top .navbar-nav .nav-link > .fa {
+  top: 3px;
+  line-height: 12px;
+}
+
+.navbar-icon-top .navbar-nav .nav-link > .fa > .badge {
+  top: -10px;
+}
+
+@media (min-width: 576px) {
+  .navbar-icon-top.navbar-expand-sm .navbar-nav .nav-link {
     text-align: center;
- }
+    display: table-cell;
+    height: 70px;
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 
- .lower{
-   margin-top: 1vh;
-   margin-left: auto;
-   margin-right: auto;
-   min-width: 80px;
-   max-width: 300px;
-   width: 100%;
- }
+  .navbar-icon-top.navbar-expand-sm .navbar-nav .nav-link > .fa {
+    display: block;
+    width: 48px;
+    margin: 2px auto 4px auto;
+    top: 0;
+    line-height: 24px;
+  }
 
- .bigger{
-  padding: 1.5vh;
- }
-
- .navindex:hover{
-    background: black;
-    color: white;
-    text-decoration: none;
- }
-
-.title{
-  border-radius: 1vh;
-  background: white;
-  font-size: 35px;
-  padding-right: 2vh;
-  padding-left: 2vh;
-  padding-top: 0.4vh;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  color: yellow;
-  text-decoration: none;
-  margin-top:1vh;
+  .navbar-icon-top.navbar-expand-sm .navbar-nav .nav-link > .fa > .badge {
+    top: -7px;
+  }
 }
 
-.link:hover{
-  text-decoration: none;
+@media (min-width: 768px) {
+  .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link {
+    text-align: center;
+    display: table-cell;
+    height: 70px;
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link > .fa {
+    display: block;
+    width: 48px;
+    margin: 2px auto 4px auto;
+    top: 0;
+    line-height: 24px;
+  }
+
+  .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link > .fa > .badge {
+    top: -7px;
+  }
 }
 
-.hi{
-  margin-right: 0.5vw;
+@media (min-width: 992px) {
+  .navbar-icon-top.navbar-expand-lg .navbar-nav .nav-link {
+    text-align: center;
+    display: table-cell;
+    height: 70px;
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .navbar-icon-top.navbar-expand-lg .navbar-nav .nav-link > .fa {
+    display: block;
+    width: 48px;
+    margin: 2px auto 4px auto;
+    top: 0;
+    line-height: 24px;
+  }
+
+  .navbar-icon-top.navbar-expand-lg .navbar-nav .nav-link > .fa > .badge {
+    top: -7px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link {
+    text-align: center;
+    display: table-cell;
+    height: 70px;
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link > .fa {
+    display: block;
+    width: 48px;
+    margin: 2px auto 4px auto;
+    top: 0;
+    line-height: 24px;
+  }
+
+  .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link > .fa > .badge {
+    top: -7px;
+  }
 }
 
 </style>

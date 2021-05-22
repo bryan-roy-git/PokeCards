@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="main">
         <div class="container0">
         <form @submit.prevent="changePass" class="form">
             <div v-if="message.length > 0" class="alert alert-danger" role="alert">
@@ -108,7 +108,9 @@ export default {
 </script>
 
 <style scoped>
-.container{
+.main{
+    background-color: #f6f7c7;
+    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
@@ -119,42 +121,8 @@ h2{
     padding-top: 2vh;
 }
 
-	#ChangeForm{
-	background-color: #f6f7c7;
-	display: block;
-	width: 100%;
-	overflow: auto;
-	height:fit-content;
-	text-align: center;
-    
-  }
-
   .alert{
 	margin-top:2vh;
-  }
- 
-  .newUser{
-
-    display:flex;
-    align-items: center;
-    justify-content: center;
-  }
- 
-  .goRegister{
-	border-radius: 1vh;
-	background-color: #4CAF50;
-	padding: 1.5vh;
-	color: white;
-	display: block;
-	margin-top: 2vh;
-	margin-left: auto;
-	margin-right: auto;
-  }
- 
-  .goRegister:hover{
-	text-decoration: none;
-	opacity: 0.8;
-	color: white;
   }
  
   .check{

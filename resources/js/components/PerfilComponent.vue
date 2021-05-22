@@ -1,154 +1,58 @@
 <template>
-    <div id="main">
-        <div>
-        <div class="container">
-            <div class="row justify-content">
-                <div class="col-md-8">
-                    <div class="card cambios" style="background-color:  #85c1e9; width: 100vw">
-                        <h1>
-                            <div class="card-header text-center izquierda">
-                                PERFIL
-                                <div class="dropdown">
-                                    <div>
-                                        <img
-                                            :src="'/api/getAvatar'"
-                                            style="max-width: 100px; max-height: 100px; min-width: 100px; min-height: 100px"
-                                        />
-                                        <div class="cuadro_perfil">
-                                        <form @submit="formSubmit" enctype="multipart/form-data" style='background: #f7dc6f'>
-                                            <div class="form-group">
-                                                <strong class="change">Change it</strong>
-                                                <input type="file" class="form-control" v-on:change="uploadImage" style='background:  #ccd1d1'>
-                                            </div>
-                                            <button type="submit" class="btn-primary btn">Send</button>
-                                        </form>
-                                        </div>
-                                    </div>
-                                </div>
+    <div id="container">
+         <div class="subcontainer">
+        <div class="cambios bloque" >
+            <h2><b>Avatar</b></h2>
+            <hr>
+            <div class="text-center izquierda">
+                <div>
+                    <img :src="'/api/getAvatar'" style="max-width: 100px; max-height: 100px; min-width: 100px; min-height: 100px" />
+                    <hr>
+                    <div class="cuadro_perfil">
+                        <form @submit="formSubmit" enctype="multipart/form-data" >
+                            <div class="form-group">
+                                <strong class="change">Change it</strong>
+                                <p></p>
+                                <label class="btn btn-primary">
+                                    <i class="fa fa-image"></i> Choose your file<input type="file" style="display: none;"  name="image" v-on:change="uploadImage"> 
+                                </label>
+                                <p :style="show">File: {{file}}</p>
+                                
+                                <!-- <input type="file" class="form-control" v-on:change="uploadImage" > -->
                             </div>
-                        </h1>
+                            <button type="submit" class="">Send</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
+             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { required, minLength, sameAs, email } from "vuelidate/lib/validators";
-import BaseInput from "../components/BaseInput.vue";
-import ChangePass from "./ChangePass.vue";
-import ChangeProfile from "./ChangeProfile.vue";
-
+import $ from 'jquery'
 export default {
-    components: { BaseInput, ChangeProfile, ChangePass},
     data() {
         return {
-            form: {
-                nick: "",
-                email: "",
-                password: "",
-                rpassword: ""
-            },
-            name: '',
             image: '',
             success: '',
-            menu: [
-                {
-                    title: "Reset Password",
-                    icon: "fa fa-user"
-                },
-                {
-                    title: "Change of dates",
-                    icon: "fa fa-chart-area"
-                }
-            ],
-            reset: false,
-            change: false,
             img: null,
-            CardsPath: "/images/Cartas/",
-            IconsPath: "/images/Types/",
-            maxHP: this.HP,
-            notFlipped: true,
-            player: {
-                name: "Charmander",
-                type: "",
-                hp: 100,
-                maxHP: 100,
-                level: 5,
-                attacks: ["Hoja", "Fotosintesis", "Rama", "Fruta"],
-                attacksDamage: [15, 40, 50, 25],
-                HpBar: { width: "100%" },
-                ATK: 15,
-                DEF: 15,
-                SPD: 15
-            },
-            player2: {
-                name: "Squirtle",
-                type: "",
-                hp: 100,
-                maxHP: 100,
-                level: 5,
-                attacks: ["Hoja", "Fotosintesis", "Rama", "Fruta"],
-                attacksDamage: [15, 40, 50, 25],
-                HpBar: { width: "100%" },
-                ATK: 15,
-                DEF: 15,
-                SPD: 15
-            },
-            player3: {
-                name: "Bulbasaur",
-                type: "",
-                hp: 100,
-                maxHP: 100,
-                level: 5,
-                attacks: ["Hoja", "Fotosintesis", "Rama", "Fruta"],
-                attacksDamage: [15, 40, 50, 25],
-                HpBar: { width: "100%" },
-                ATK: 15,
-                DEF: 15,
-                SPD: 15
+            file:'',
+            show:{
+                display: 'none'       
             }
         };
     },
-    validations: {
-        form: {
-            nick: {
-                required,
-                minLength: minLength(3)
-            },
-            email: {
-                required,
-                email
-            },
-            password: {
-                required,
-                minLength: minLength(4)
-            },
-            rpassword: {
-                required,
-                sameAsPassword: sameAs("password")
-            }
-        }
-    },
     methods: {
-        onSubmit() {
-            if (this.formValidate) {
-                console.log(this.form);
-                console.log("Form enviado");
-                axios.get("/api/avatar/indice.jpeg").then(function(response) {
-                    console.log(response);
-                });
-            } else {
-                console.log("Form error");
-            }
-        },
         uploadImage(e){
-            console.log(e.target.files[0]);
+            //console.log(e.target.files[0],'hi');
             this.image = e.target.files[0];
+            this.file = e.target.files[0].name
+            this.show={display:'block'}
+            //console.log(this.show)
         },
-        formSubmit(e) {
+        async formSubmit(e) {
             e.preventDefault();
             let currentObj = this;
             const config = {
@@ -156,61 +60,87 @@ export default {
             }
             let formData = new FormData();
             formData.append('image', this.image);
-            axios.post('api/updateAvatar', formData, config)
+            await axios.post('api/updateAvatar', formData, config)
                 .then(function (response) {
                     currentObj.success = response.data.success;
                     console.log(currentObj.success)
                 }).catch(function (error) {
-
                     currentObj.output = error;
                 });
-            console.log("Hola");
-            this.$router.go('perfil');
+            
+            this.$router.go('changeAvatar');
         },
-        boolean_reset() {
-            this.reset = true;
-            this.change = false;
-        },
-        boolean_change() {
-            this.reset = false;
-            this.change = true;
-        }
     },
-    computed: {
-        formValidate() {
-            return !this.$v.$invalid;
-        }
-    }
 };
 </script>
 <style scoped>
+.container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-wrap: break-word;
+}
+.subcontainer{
+	margin-top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+  }
+ 
+  h2{
+	margin-top:2vh;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  }
+ 
+img{
+    margin: 20px;
+}
 .cuadro_perfil {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.card-body {
-    width: 90vw!important;
-}
-#main {
-    display: flex;
-    justify-content: left;
-}
 .izquierda {
-    height: 70vh;
     margin: 0!important;
     padding: 0!important;
-    background-color:  #85c1e9;
-
-}
-.cambios {
-    padding: 0;
-    margin-top: 50px;
+    /*background-color:  #85c1e9;*/
 }
 .change {
+    margin-bottom: 5vh;
     color: black;
     font-size: 20px;
     width: 100%;
     text-decoration: underline;
 }
+.underline{
+    text-decoration: underline;
+}
+.bloque{
+    text-align: center;
+    border:solid 3px black;
+    border-radius: 1vh;
+    min-width: 300px;
+    padding: 2vh;
+    padding-top: 0;
+    margin-top: 3.5vh;
+    margin-bottom: 3.5vh;
+    width:40%;
+    background-color: white;
+}
+button {
+	background-color: #4CAF50;
+	border-radius: 1vh;
+	color: white;
+	padding: 1.5vh;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+  }
+ 
+  button:hover {
+	opacity: 0.8;
+  }
 </style>

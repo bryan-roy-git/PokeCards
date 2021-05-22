@@ -11,16 +11,16 @@
             class="form-control" 
             />
             <div v-if="validator.$dirty && validator.$error && label=='Nick:' " class="invalid-feedback">
-                Minimo 3 caracteres
+                At least 3 characters
             </div>
             <div v-if="validator.$dirty && validator.$error && label=='Email:' " class="invalid-feedback">
-                Por favor ingresa un email valido
+                Please enter a valid email
             </div>
             <div v-if="validator.$dirty && validator.$error && label=='Password:' " class="invalid-feedback">
-                Minimo 4 caracteres
+                At least 8 characters
             </div>
             <div v-if="validator.$dirty && validator.$error && label=='Confirm password:' " class="invalid-feedback">
-                El password no coincide
+               The passwords must match
             </div>
 
     </div>

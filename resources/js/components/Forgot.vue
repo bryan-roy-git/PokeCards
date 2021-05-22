@@ -1,7 +1,7 @@
 <template>
 <div id="forgot">
       <div class="container0">
-        <form @submit.prevent="Forgot">
+        <form class="form" @submit.prevent="Forgot">
           <div class="messageOrerror">
             <div v-if="message" class="alert alert-success" role="alert">
               {{message}}

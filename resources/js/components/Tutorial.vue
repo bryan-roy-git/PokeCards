@@ -139,11 +139,28 @@ methods: {
           this.attacks = false
           this.options = false
           this.matchEnded = true;
-          this.SetFirstPokemon(this.player.id);
-          console.log(this.player.id, 'setRewards')
-          setTimeout(() => {this.battleText = "You have no more cards left!"},2000)
-          setTimeout(() => { this.$router.push('../home')},4000)
-         
+          if (this.player.hp==0){
+            console.log(this.player.id, 'setRewards')
+            this.SetFirstPokemon(this.player.id);
+            this.SetCreateFirstDeck()
+            setTimeout(() => {this.battleText = "You have no more cards left!"},2000)
+            setTimeout(() => {this.battleText = "You took "+this.player.name+" and ran away!"},4000)
+            setTimeout(() => { this.$router.replace('/home')},6000)
+          }
+          else{
+            this.SetFirstPokemon(this.player.id);
+            this.SetCreateFirstDeck()
+            setTimeout(() => {this.battleText = "You received "+ this.player.name+"!"},2000)
+            setTimeout(() => { this.$router.replace('/home')},4000)
+          }        
+ 
+      },
+
+      async SetCreateFirstDeck(){
+          const res = await axios.post('/api/createDeck',{
+              id: this.player.id
+          })
+
       },
 
       async SetFirstPokemon(id){

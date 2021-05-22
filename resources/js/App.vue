@@ -4,7 +4,7 @@
     <div class="header">
       <!--<Nav></Nav>-->
       <Nav v-if="['login', 'register', 'forgot', 'reset', 'home', 'base', 'adventure', 'profile',
-      'shop','myshops','myGamesOff','avatar', 'changePass', 'changeProfile'].includes($route.name)"></Nav>
+      'shop','myshops','myGamesOff','avatar', 'changePass', 'changeProfile', 'decks'].includes($route.name)"></Nav>
     </div>
     <div class="main">
       <router-view/>
@@ -36,9 +36,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: #f6f7c7;
+  background-color: #343a40;
+  // background-image: url(https://wallpaper.dog/large/5576984.jpg);
+  // background-size:cover;
+  //background-position: center 70px;
   min-height: 100vh;
-  height: fit-content;
+ /* overflow: hidden;*/
+  
   
 }
 

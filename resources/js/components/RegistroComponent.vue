@@ -5,7 +5,7 @@
         </div>
     <div class="containerRoot">
 
-        <form @submit.prevent="Register">
+        <form class="form" @submit.prevent="Register">
             <h2><b>Register</b></h2>
             <hr>
             <div class="form-group">
@@ -46,7 +46,6 @@
             </button>
             <hr>
         
-            <hr>
             <div class="container">
                 <label class="psw">
                     <span>Already have an account? <router-link to="login">Sign in</router-link></span>
@@ -196,7 +195,8 @@ h2{
   align-items: center;
   justify-content: center;
   background-color:#f1f1f1;
-  margin-top: 1vh;
+  position: relative;
+  top:5px
 }
 
 button {

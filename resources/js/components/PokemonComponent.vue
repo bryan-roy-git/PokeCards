@@ -1,20 +1,17 @@
 
 <template>
     <div class="poke_container">
-        <h1>Pokemons</h1> 
-        Pokemons; {{user_cards}}
-        PokeCoins: {{coins_total}}
-        <!-- {{coins}} -->
-        <div  class="row">
+        <div class="row">
             <span v-for="pokemon in pokemons" :key="pokemon.id">
                 <span v-if="exist_pokeCart(pokemon)">
                     <div class="col-md-5 s_sec ">
                         <div class="card carta" >
                                 <img class="card-img-top" :src=pokemon.image_path style=" filter: grayscale(100%);">
+                                <div class="incart">In cart</div>
                                 <span class="card-name">{{ pokemon.name }}</span>
                                 <span class="card-name">Price: {{ pokemon.price }}</span>
                                 <div>
-                                    <span class="btn btn-primary" data-toggle="modal" data-target="#centralModalInfo" @click="getPokemon(pokemon)"  >
+                                    <span class="btn btn-secondary" data-toggle="modal" data-target="#centralModalInfo" @click="getPokemon(pokemon)"  >
                                         Ver
                                     </span>
                                 </div>
@@ -24,11 +21,12 @@
                 <span v-else-if="exist_userCards(pokemon.id)">
                     <div class="col-md-5 s_sec ">
                         <div class="card carta">
+                                <div class="haveit">Already have it</div>
                                 <img class="card-img-top" :src=pokemon.image_path  alt="bulbasaur" style=" filter: grayscale(100%);">
                                 <span class="card-name">{{ pokemon.name }}</span>
                                 <span class="card-name">Price: {{ pokemon.price }}</span>
                                 <div>
-                                    <span class="btn btn-primary" data-toggle="modal" data-target="#centralModalInfo" @click="getPokemon(pokemon)"  >
+                                    <span class="btn btn-secondary" data-toggle="modal" data-target="#centralModalInfo" @click="getPokemon(pokemon)"  >
                                         Ver
                                     </span>
                                 </div>
@@ -72,7 +70,7 @@
 
             <div class="modal fade" id="centralModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-notify modal-info" role="document">
-                    <div class="card cartaInfo">
+                    <div class="card cartaInfo" :style="cardColor(pokeInfo.rarity)">
                         <img class="card-img-top-info" :src=pokeInfo.image_path  alt="bulbasaur">
                             <span class="card-name-info">{{ pokeInfo.name }}</span>
                             <span class="card-text-info">ATK: {{ pokeInfo.atk }}</span>
@@ -102,7 +100,7 @@
 
 <script>
 import vPagination from 'vue-plain-pagination'
-import BaulComponent from './BaulComponent'
+import BaulComponent from './Carrito'
 import cart from '../store/index'
 import user from '../store/store'
     export default {
@@ -115,12 +113,9 @@ import user from '../store/store'
         
         data: function () {
             return {
-                // pokemon_local=this.pokemons,
                 user:user.state.user,
-                // coins:user.state.monedas,
                 cards:null,
                 pokeInfo:"",
-                // coins_minim:null,
                 currentPage: 1,
                 bootstrapPaginationClasses: {
                     ul: 'pagination',
@@ -157,38 +152,26 @@ import user from '../store/store'
                 await axios.post('api/user/restarPrice',{
                     price:pokemon.price
                 })
-                // .then((res) => {
-                //     // console.log(res)
-                //     this.coins = res.data
-                // })
-                // .then(() => {
-                //     // this.pokemons_cart=cart.state.pokemons_cart
-                // })
+
                 user.dispatch('add_poke',pokemon.price)
                 cart.dispatch('addPoke',pokemon)
-                // console.log(cart.state.pokemons_cart[7])
+ 
                 return pokemon
             },
             exist_pokeCart(poke){
                 for (let x = 0; x < this.pokemons_cart.length; x++) {
                     var boolea = null
-                    // console.log(this.pokemons_cart[x].id, poke.id)
                     if (this.pokemons_cart[x].id == poke.id){
-                        // console.log("existe",poke.name)
-                        // console.log(this.pokemons_cart[x].id == poke.id)
-                        // console.log(this.pokemons_cart[x].id, poke.id)
                         boolea = true
                         break
                     }else{
-                        // console.log("no existe",poke.name)
                         boolea = false
-                        // break
                     }
                 }
                 return boolea
             },
             exist_userCards(poke_id){
-                console.log(this.user_cards)
+              
                 // console.log(this.pokemons_cart)
                 var pokeList=this.user_cards.split(',')
                 for (let x = 0; x < pokeList.length; x++) {
@@ -205,7 +188,6 @@ import user from '../store/store'
                 return boolea
             },
             cardColor(rarity){
-                console.log(rarity)
                 if (rarity=="common"){
                     return  {"background-image": "linear-gradient( to top left, white, yellow, white)"}
                 }
@@ -261,6 +243,8 @@ import user from '../store/store'
 .poke_container{
     width: 100%;
     align-content: center;
+    margin-top: 50px;
+    margin-left:50px
     /* background: black; */
 }
 
@@ -317,20 +301,16 @@ img{
     margin-right: auto;
     margin-top: 5px;
     margin-bottom: 5px;
-    /* min-width: 100px; */
-    /* max-width:125px; */
     width: 9vw; 
     height: 130px;
-    /* background-color: white; */
 }
+
 .card-img-top-info{
     border: black 0px solid;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
     margin-bottom: 5px;
-    /* min-width: 100px; */
-    /* max-width:125px; */
     width: 12vw; 
     height: 160px;
     /* background-color: white; */
@@ -483,6 +463,26 @@ img{
     font-size: 13px;
     font-family: "Roboto Condensed";
 }
+
+
+.incart{
+    position: absolute;
+    color: red;
+    font-size: 12px;
+    top: 9px;
+    left: 25px;
+    transform: translate(-50%, -50%);
+}
+.haveit{
+    position: absolute;
+    color: red;
+    font-size: 12px;
+    top: 9px;
+    left: 45px;
+    transform: translate(-50%, -50%);
+
+}
+
 }
 
 </style>

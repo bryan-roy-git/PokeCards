@@ -23,8 +23,6 @@ class CreateUsersTable extends Migration
         // $table->integer('loses')->default('0');
         // $table->integer('game_played')->default('0');
         // $table->string('pokemons')->nullable();
-        // $table->string('decks')->nullable();
-        // $table->string('main_deck')->nullable();
         // $table->integer('coins')->default('0');
         // $table->string('cart')->nullable();
         // $table->string('turn')->nullable();

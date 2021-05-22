@@ -39,15 +39,15 @@ export default new Vuex.Store ({
         async fetcCart({commit}) { // llamado a la API
                 await fetch('/api/cart/getCart')
                 .then(res => {
-                    console.log(res, 'respuesta c')
+                   // console.log(res, 'respuesta c')
                         return res.json()
                 })
                 .then (json => {
-                    console.log(json)
+                    //console.log(json)
                     if (json.length==0){
                         
                     } else{
-                        console.log(json.data, 'es eso')
+                        //console.log(json.data, 'es eso')
                         commit('setPokemon',json.data)
                     }
                 })
