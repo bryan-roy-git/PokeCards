@@ -23,7 +23,7 @@ class Cart extends Migration
             //$table->primary(['user_id', 'poke_id']);
             // $table->foreign('user_id')->references('id')->on('users');
             
-        // });
+         });
     }
 
     /**
