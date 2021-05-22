@@ -14,14 +14,14 @@ class Cart extends Migration
     public function up()
     {
         
-        // Schema::create('cart', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('user_id')->constrained('users');
-        //     $table->foreignId('poke_id')->constrained('pokemons');
-        //     $table->dateTime('created_at');
-        //     $table->dateTime('updated_at');
-        //     //$table->primary(['user_id', 'poke_id']);
-        //     // $table->foreign('user_id')->references('id')->on('users');
+        Schema::create('cart', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('poke_id')->constrained('pokemons');
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
+            //$table->primary(['user_id', 'poke_id']);
+            // $table->foreign('user_id')->references('id')->on('users');
             
         // });
     }
