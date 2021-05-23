@@ -1,5 +1,5 @@
 <template>
-        <div class="contenedor" @click="FlipMe">
+        <div class="contenedor" @click="FlipMe" :style="vibrar">
             <div v-if="notFlipped" class="card carta" :style="cardColor">
                 <!-- <span class="player-level">Lvl. {{Level}}</span> -->
                 <div class="hp-bar">
@@ -27,6 +27,7 @@
                 <span class="card-attack">SPD: {{SPD}}</span>
             </div>
         </div>
+        
 
 </template>
 
@@ -53,7 +54,8 @@ export default {
         SPD: {},
         HpBar: {},
         maxHP: {},
-        Rarity:{}
+        Rarity:{},
+        Attacked:{}
     },
     computed: {
             HPStyle(){    
@@ -68,7 +70,7 @@ export default {
 
                 var percent=this.HP/this.maxHP*100
                 percent = Math.round(percent)
-                console.log(percent, 'percent')
+                //console.log(percent, 'percent')
                 if (percent<=0){
                     return {
                         width: '100%',
@@ -112,6 +114,15 @@ export default {
                      return  {"background-image": "linear-gradient(to top left, white, orange , white )"}
                 }
 
+            },
+
+            vibrar(){
+                if (this.Attacked){
+                    return {
+                           animation: 'shake 0.5s',
+                           'animation-iteration-count': '1'
+                    }
+                }
             }
 
             
@@ -137,8 +148,24 @@ export default {
 
 <style lang="css">
 @import "../../css/cards.css";
-.im-flipped {
-    transform: rotateY(180deg);
+
+.vibrar{
+  animation: shake 0.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
 </style>

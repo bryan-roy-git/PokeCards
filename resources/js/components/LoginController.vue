@@ -64,11 +64,12 @@ export default {
                 password: this.password,
             })
               this.$awn.success("Welcome")
-              console.log(res.data.pokemons)
+              
               if (res.data.pokemons == null){
+                console.log(res.data.pokemons, 'hasPokes?')
                 return this.$router.push('starting');
               } else{
-                 this.$store.dispatch('getDecks')
+                  this.$store.dispatch('getDecks')
                   return this.$router.go('home');
               }
 

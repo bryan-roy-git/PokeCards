@@ -3,7 +3,7 @@
 <div id="wild">  
   <div v-if="!changing" class="battle-arena" :style="{'background-image': 'url('+MapBackground+')','background-size': '100% 100%'} ">
     <div class="tutorial-card-opponent">
-      <Card :HP="opponent.poke.hp" :maxHP="opponent.poke.maxHP" :Name="opponent.poke.name" :ATK="opponent.poke.atk" :DEF="opponent.poke.def" :SPD="opponent.poke.spd"
+      <Card :Attacked="attacked" :HP="opponent.poke.hp" :maxHP="opponent.poke.maxHP" :Name="opponent.poke.name" :ATK="opponent.poke.atk" :DEF="opponent.poke.def" :SPD="opponent.poke.spd"
             :Type="opponent.poke.type" :Level="opponent.poke.level" :HPBar="opponent.poke.HPBar" :Img="opponent.poke.image_path" :Rarity="opponent.poke.rarity"></Card>
     </div> 
 
@@ -107,6 +107,7 @@ export default {
         opmaxedATK:false,
         opmaxedDEF:false,
         wins:false,
+        attacked:false
         //maxedSPD:false,
 
 
@@ -214,15 +215,20 @@ faintAnimation: function(){
       this.matchEnded = true; 
       setTimeout(() => {this.battleText = "You have no more cards left!"},2000)
       setTimeout(() => { this.$router.push('../adventure')},4000)
+      console.log(this.opponent.poke.id, 'hello')
+      console.log(this.player.current.id, 'hello')
       this.setRewards(this.opponent.poke.id,this.player.current.id)
   } else if (this.opponent.cards==0){
         this.wins = true
         this.matchEnded = true; 
+        console.log(this.opponent.poke.id, 'hello')
+        console.log(this.player.current.id, 'hello')
         this.setRewards(this.opponent.poke.id, this.player.current.id)
         console.log(this.coins)
+
         if (this.droppedPokemon != null){
            setTimeout(() => {this.battleText = "You have won "+this.coins+" PokeCoins and obtained "+this.opponent.poke.name},2000)
-           decksStore.dispatch('getDecks')
+           this.$decksStore.dispatch('getDecks')
         }
         else{
            setTimeout(() => {this.battleText = "You have won "+this.coins+" PokeCoins"},2000)
@@ -266,6 +272,7 @@ async setRewards(op_id, player_id){
                  coins: this.coins})
 
     } else{
+        console.log(player_id, 'iddddddddd')
         await axios.post('../api/setRewards', {
             coins: this.coins,
             droppedPokemon: this.droppedPokemon,
@@ -355,6 +362,8 @@ selectAttack(attack) {
               realDamage=1
           }
           this.opponent.poke.hp -= realDamage
+          this.attacked = true;
+          setTimeout(() => {this.attacked=false},2000)
           var percent=Math.round(this.opponent.poke.hp/this.opponent.poke.maxHP*100)
         }  
         if(this.Fainted(this.opponent.poke)){
@@ -423,6 +432,8 @@ opponentAttack(){
             realDamage=1
           }
           this.player.current.hp -=  realDamage
+          this.attacked = true;
+          setTimeout(() => {this.attacked=false},2000)
           var percent=Math.round(this.player.current.hp/this.player.current.maxHP*100)
       }
           
