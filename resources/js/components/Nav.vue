@@ -94,7 +94,7 @@ export default {
     async Logout(){
         localStorage.removeItem("who")
         await this.$store.dispatch("logout")
-        return this.$router.push('login')
+        return this.$router.go('login')
     }
     
   },
