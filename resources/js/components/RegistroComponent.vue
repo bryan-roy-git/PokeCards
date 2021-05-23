@@ -215,10 +215,6 @@ button {
   width: 100%;
 }
 
-button:hover {
-  opacity: 0.8;
-}
-
 .mybtn{
   margin-bottom: 0;
 }

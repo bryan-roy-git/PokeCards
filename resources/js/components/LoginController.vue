@@ -64,15 +64,13 @@ export default {
                 password: this.password,
             })
               this.$awn.success("Welcome")
-              console.log("NewVersion")
               if (res.data.pokemons == null){
-                       console.log(res.data.pokemons, 'hasPokes?')
-                        this.$store.dispatch('clearPokes')
-                       this.$store.dispatch('getDecks')
+                this.$store.dispatch('showDeck/'+0)
+                this.$store.dispatch('getDecks')
                 return this.$router.push('starting');
               } else{
-                       this.$store.dispatch('clearPokes')
-                       this.$store.dispatch('getDecks')
+                  this.$store.dispatch('showDeck/'+0)
+                  this.$store.dispatch('getDecks')
                   return this.$router.push('home');
               }
 
