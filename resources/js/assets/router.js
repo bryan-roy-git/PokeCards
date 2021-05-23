@@ -84,12 +84,12 @@ router.beforeEach( (to, from, next) => {
 
   async function userPokes() {
     const pokes = await axios.get('api/pokesUser')
-    //console.log(pokes)
+    //
     return pokes;
   }
 
   var pokes=userPokes()
-  
+  console.log(pokes)
   if (to.matched.some(record => record.meta.requiresNoPokemon)) {
 
     if (pokes!=null) {
