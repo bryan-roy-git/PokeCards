@@ -168,7 +168,7 @@ export default {
   .plusButtonCarousel{
     position: relative;
     background-color: black;
-        border-radius: 0.5vh;
+    border-radius: 0.5vh;
     cursor: pointer;
     color: rgb(248, 247, 247);
     padding: 10px 20px;

@@ -46,12 +46,14 @@ export default new Vuex.Store({
             const res =  await axios.get('/api/pokesUser')
             var cards=res.data
             var user_cards=[]
+            
             for (let index = 0; index < cards.length; index++) {
                 const res = await axios.get('/api/pokemon/'+cards[index])
                 user_cards.push(res.data.data)
             }
             commit('SET_SHOWPOKES', user_cards)
         },
+
 
         async showDeck({commit},id){
             const res= await axios.get('/api/getDeck/'+id)
