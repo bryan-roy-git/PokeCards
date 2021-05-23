@@ -66,11 +66,11 @@ export default {
               this.$awn.success("Welcome")
               
               if (res.data.pokemons == null){
-                console.log(res.data.pokemons, 'hasPokes?')
+                       console.log(res.data.pokemons, 'hasPokes?')
                 return this.$router.push('starting');
               } else{
-                  this.$store.dispatch('getDecks')
-                  return this.$router.go('home');
+                       this.$store.dispatch('getDecks')
+                  return this.$router.push('home');
               }
 
             }catch{

@@ -70,7 +70,7 @@ export default {
 
                 var percent=this.HP/this.maxHP*100
                 percent = Math.round(percent)
-                //console.log(percent, 'percent')
+
                 if (percent<=0){
                     return {
                         width: '100%',
