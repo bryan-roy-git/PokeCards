@@ -82,11 +82,13 @@ import BaulComponent from './Carrito';
 
 .container{
     border: 5px solid silver;
+    border-top:none;
     width: 70%;
 }
 .baul{
     border: 5px solid silver;
-    
+    border-top:none;
+    border-left:none;
     background: #343a40 !important;
     width: 30%;
 }

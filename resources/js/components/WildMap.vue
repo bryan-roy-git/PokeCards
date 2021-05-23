@@ -228,7 +228,7 @@ faintAnimation: function(){
 
         if (this.droppedPokemon != null){
            setTimeout(() => {this.battleText = "You have won "+this.coins+" PokeCoins and obtained "+this.opponent.poke.name},2000)
-           this.$decksStore.dispatch('getDecks')
+           this.$store.dispatch('getDecks')
         }
         else{
            setTimeout(() => {this.battleText = "You have won "+this.coins+" PokeCoins"},2000)
@@ -249,7 +249,7 @@ async setRewards(op_id, player_id){
     var max = Math.floor(100);
     var chance= Math.floor(Math.random() * (max - min) + min);
   
-    if (chance <= 10 ){
+    if (chance <= 90 ){
       this.droppedPokemon=op_id.toString()
   
     }
@@ -267,10 +267,15 @@ async setRewards(op_id, player_id){
     console.log(this.coins, 'coins')
     console.log(this.droppedPokemon, 'dropped')
     if (this.droppedPokemon==null){
+      console.log(player_id, 'iddddddddd')
       console.log('only coins')
            await axios.post('../api/setRewards', {
-                 coins: this.coins})
-
+                 coins: this.coins,
+                  poke_player: player_id,
+                  poke_op: this.droppedPokemon,
+                  wins: 1
+          })
+                            
     } else{
         console.log(player_id, 'iddddddddd')
         await axios.post('../api/setRewards', {
@@ -289,7 +294,6 @@ async setRewards(op_id, player_id){
           wins: 0,
           poke_player: player_id,
           poke_op: op_id
-          // droppedPokemon: this.droppedPokemon
       })
     }
   

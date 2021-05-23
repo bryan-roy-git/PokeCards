@@ -270,6 +270,9 @@ export default {
     width: 85%;
     min-height: 100%;
     border: 5px solid silver;
+    border-top:none;
+    border-left:none;
+    
 }
 
 .current_deck{
@@ -280,6 +283,9 @@ export default {
     justify-content: center;
     align-items: center;
     border: 5px solid silver;
+    border-right: none;
+    border-left: none;
+    border-top: none;
 }
 
 .changeMainDeck{
@@ -314,6 +320,7 @@ export default {
     max-width: 240px;
     background-color: #343a40;
     border: 5px solid silver;
+    border-top:none;
 }
 
 .plus{
@@ -351,9 +358,14 @@ export default {
 
 .pokes{
     border: 5px solid silver;
+    border-top:none;
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
     display: flex;
     align-items: center;
     justify-content: center;
+
    
 }
 

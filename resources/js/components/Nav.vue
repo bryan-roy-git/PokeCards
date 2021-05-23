@@ -93,7 +93,9 @@ export default {
   methods:{
     async Logout(){
         localStorage.removeItem("who")
+        localStorage.removeItem('length')
         await this.$store.dispatch("logout")
+        
         return this.$router.go('login')
     }
     

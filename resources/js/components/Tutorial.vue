@@ -164,7 +164,8 @@ methods: {
       },
 
       async SetFirstPokemon(id){
-        await axios.post('/api/setPokemon/'+id)  
+        await axios.post('/api/setPokemon/'+id) 
+        localStorage.setItem('length',true) 
         console.log('+') 
         return user.dispatch('getUser');
            

@@ -63,14 +63,13 @@ export default {
                 email: this.email,
                 password: this.password,
             })
+
+   
               this.$awn.success("Welcome")
               if (res.data.pokemons == null){
-                this.$store.dispatch('showDeck/'+0)
-                this.$store.dispatch('getDecks')
                 return this.$router.push('starting');
               } else{
-                  this.$store.dispatch('showDeck/'+0)
-                  this.$store.dispatch('getDecks')
+                  localStorage.setItem('length',true)
                   return this.$router.push('home');
               }
 
@@ -81,8 +80,7 @@ export default {
         }
     },
     mounted(){
-      this.$store.dispatch('showDeck')
-      this.$store.dispatch('showPokes')
+
     }
 }
 </script>
