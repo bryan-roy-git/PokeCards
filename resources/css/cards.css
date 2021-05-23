@@ -22,7 +22,7 @@
     }
 }
 .card-img-top{
-    border: black 1px solid;
+    /*border: black 1px solid;*/
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
@@ -31,7 +31,7 @@
     max-width:125px;
     width: 8vw; 
     height: 110px;
-    background-color: white; 
+    /*background-color: white; */
 }
 
 .behind{
