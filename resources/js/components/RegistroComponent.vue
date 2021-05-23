@@ -54,6 +54,7 @@
 
         </form>
     </div>
+
 </div>
         <!-- {{ $v.form.$model }} -->
 </template>
@@ -92,7 +93,7 @@ export default {
             },
             password: {
                 required,
-                minLength: minLength(4)
+                minLength: minLength(8)
             },
             rpassword: {
                 required,
@@ -132,14 +133,14 @@ export default {
                     console.log("RESPUESTA ",response.data);
                     this.resetForm();
                     this.message=""
-                    this.$awn.success("Registro realizado con exito")
+                    this.$awn.success("Registered Successfully")
                     this.$router.push('login')
 
                 })
                 .catch (error => {
                     console.log("ERROR ",error);
-                    this.$awn.warning("Email ya registrado")
-                    this.message="El email ya esta registrado"
+                    this.$awn.warning("This email is already registered")
+                    this.message="This email is already registered"
                     this.$v.form.email.$model = "";
 
                 })
@@ -164,11 +165,15 @@ export default {
    @import "../../css/styles.css";
 
 #registerForm{
-  background-color: #f6f7c7;
-  display: block;
-  width: 100%;
-  height:100vh;
-  height:fit-content;
+    background-color: #f6f7c7;
+    display: block;
+    width: 100%;
+    height:100vh;
+    height:fit-content;
+    background-image: url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png),url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/151.png);
+    background-repeat: no-repeat;
+    background-size:auto;
+    background-position-x: left ,  right;
 }
 
 h2{

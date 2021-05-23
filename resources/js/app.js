@@ -44,7 +44,6 @@ Vue.use(BootstrapVue);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
 store.dispatch('getUser').then(()=>{
     new Vue({
         render: h => h(App),

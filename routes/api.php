@@ -28,9 +28,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 */
 
 
-
-
-Route::get('user/pricePoke', [App\Http\Controllers\UserController::class,'pricePoke']); //UPDATE PRICE_POKEMONS
+//Peticion para actualizar los precios de los pokemon
+//Route::get('user/pricePoke', [App\Http\Controllers\UserController::class,'pricePoke']); //UPDATE PRICE_POKEMONS
 Route::post('user/restarPrice', [App\Http\Controllers\UserController::class,'restar_price']);
 Route::post('user/sumarPrice', [App\Http\Controllers\UserController::class,'sumar_price']);
 Route::post('user/savePoke', [App\Http\Controllers\UserController::class,'save_poke']);

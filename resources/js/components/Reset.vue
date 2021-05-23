@@ -92,6 +92,7 @@ export default {
   display: block;
   width: 100%;
   height: 90vh;
+
 }
 
 h2{

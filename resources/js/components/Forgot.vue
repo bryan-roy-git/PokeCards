@@ -77,10 +77,14 @@ export default {
   @import "../../css/styles.css";
 
 #forgot{
-  background-color: #f6f7c7;
-  display: block;
-  width: 100%;
-  height: 90vh;
+    background-color: #f6f7c7;
+    display: block;
+    width: 100%;
+    height: 90vh;
+    background-image: url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png),url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/151.png);
+    background-repeat: no-repeat;
+    background-size:auto;
+    background-position-x: left ,  right;
 }
 
 h2{
@@ -96,7 +100,6 @@ h2{
 }
 
 .container0{
-  margin-top: 0;
   display: flex;
   align-items: center;
   justify-content: center;

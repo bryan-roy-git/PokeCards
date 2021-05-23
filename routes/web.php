@@ -27,6 +27,7 @@ Route::get('/Bulbasaur', [App\Http\Controllers\HomeController::class, 'index'])-
 Route::get('/Squirtle', [App\Http\Controllers\HomeController::class, 'index'])->name('tutorial');
 Route::get('/Charmander', [App\Http\Controllers\HomeController::class, 'index'])->name('tutorial');
 Route::get('/adventure', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/online', [App\Http\Controllers\WebController::class, 'index']);
 Route::get('/wildMap/{area}', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/pokemons', [App\Http\Controllers\web\WebController::class, 'index'])->name('pokemons');
 Route::get('/profile', [App\Http\Controllers\web\WebController::class, 'index'])->name('profile');

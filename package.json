@@ -7,11 +7,14 @@
     "prod": "npm run production",
     "production": "mix --production",
     "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000"
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "start": "nodemon server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "bootstrap-vue": "^2.21.2",
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0",
     "vue-awesome-notifications": "^3.1.1",
     "vue-cookie": "^1.1.4",
     "vue-plain-pagination": "^0.3.0",
@@ -29,6 +32,7 @@
     "laravel-mix": "^6.0.6",
     "lodash": "^4.17.19",
     "mutationobserver-shim": "^0.3.7",
+    "nodemon": "^1.18.10",
     "popper.js": "^1.12",
     "portal-vue": "^2.1.7",
     "postcss": "^8.2.13",

@@ -68,7 +68,7 @@ import user from '../store/store'
 
 
 export default {
-  name: 'Tutorial',
+  name: 'Wild',
   components:{
     Card,
 

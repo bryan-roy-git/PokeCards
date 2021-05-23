@@ -296,13 +296,15 @@ img{
     }
 }
 .card-img-top{
-    border: black 0px solid;
+    border: none !important;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
     margin-bottom: 5px;
     width: 9vw; 
     height: 130px;
+    background: transparent !important;
+
 }
 
 .card-img-top-info{

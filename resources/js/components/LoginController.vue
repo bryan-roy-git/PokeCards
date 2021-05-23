@@ -63,7 +63,7 @@ export default {
                 email: this.email,
                 password: this.password,
             })
-              this.$awn.success("Bienvenido")
+              this.$awn.success("Welcome")
               console.log(res.data.pokemons)
               if (res.data.pokemons == null){
                 return this.$router.push('starting');
@@ -73,8 +73,8 @@ export default {
               }
 
             }catch{
-                this.$awn.warning("Credenciales invalidas")
-                this.credentials="Credenciales invalidas"
+                this.$awn.warning(" Invalid credentials")
+                this.credentials="Invalid credentials"
             }
         }
     },
@@ -97,14 +97,14 @@ export default {
     background-color: #f6f7c7;
     background-image: url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png),url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/151.png);
     background-repeat: no-repeat;
+    background-size:auto;
     background-position-x: left ,  right;
     display: block;
     width: 100%;
     overflow: auto;
     height:fit-content;
     text-align: center;
-    
-    
+  
   }
 
   .alert{
