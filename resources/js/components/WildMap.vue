@@ -222,6 +222,7 @@ faintAnimation: function(){
         console.log(this.coins)
         if (this.droppedPokemon != null){
            setTimeout(() => {this.battleText = "You have won "+this.coins+" PokeCoins and obtained "+this.opponent.poke.name},2000)
+           decksStore.dispatch('getDecks')
         }
         else{
            setTimeout(() => {this.battleText = "You have won "+this.coins+" PokeCoins"},2000)
@@ -241,8 +242,8 @@ async setRewards(op_id, player_id){
     var min = Math.ceil(0);
     var max = Math.floor(100);
     var chance= Math.floor(Math.random() * (max - min) + min);
-    console.log(this.player.current, "player idddddddddddddddddd")
-    if (chance <= 90 ){
+  
+    if (chance <= 10 ){
       this.droppedPokemon=op_id.toString()
   
     }

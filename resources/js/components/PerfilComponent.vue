@@ -1,5 +1,5 @@
 <template>
-    <div id="container">
+    <div class="changeAvatar">
          <div class="subcontainer">
         <div class="cambios bloque" >
             <h2><b>Avatar</b></h2>
@@ -74,13 +74,12 @@ export default {
 };
 </script>
 <style scoped>
-.container{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    word-wrap: break-word;
+
+.changeAvatar{
+        background-color: #f6f7c7;
+        height:fit-content;
 }
+
 .subcontainer{
 	margin-top: 0;
 	display: flex;

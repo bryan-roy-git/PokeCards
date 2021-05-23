@@ -13,6 +13,7 @@ export default new Vuex.Store({
         auth: false,
         monedas: 0,
         cards: '',
+
     },
     getters:{
         isAuthenticated(state){
@@ -25,7 +26,7 @@ export default new Vuex.Store({
         
         cards: (state) => {
             return state.cards;
-        }
+        },
         
     },
     mutations: {
@@ -38,7 +39,6 @@ export default new Vuex.Store({
                 state.cards =  user.pokemon   
             } 
         },
-
 
         SET_PRICE_LESS(state, price){
             state.monedas -= price
@@ -61,6 +61,9 @@ export default new Vuex.Store({
             if (log.data.nick!=null){
                 localStorage.setItem("who", true);
                 console.log(log.data)
+                if (log.data.pokemons!=null){
+                    localStorage.setItem("hasP", true);
+                }
             } else{
                 localStorage.removeItem("who")
             }
@@ -74,6 +77,7 @@ export default new Vuex.Store({
 
         async logout ({ dispatch }) {
             localStorage.removeItem("who")
+            localStorage.removeItem("hasP")
             await axios.post('logout')
             return dispatch("getUser") // dispatch => ejecutar una accion
         },

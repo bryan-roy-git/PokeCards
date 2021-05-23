@@ -58,7 +58,7 @@ export default {
     return{
         opponent:{},
         player:{
-            name: this.$route.params.pokemon,
+            name: this.$route.params,
         },
 
         IconsPath: '',
@@ -81,26 +81,25 @@ export default {
         opmaxedDEF:false,
     }
   },
+  
   mounted() {  
       
       this.getPokeData()
+
+      this.player.name=this.$route.name;
       
     },
 methods: {
 
         async getPokeData(){
-                console.log('getting')
                 const resB = await axios.get('/api/pokemon/1')
-                console.log('hello1---------------------')
-
                 let Bulbasaur = resB.data.data
                 Vue.set(Bulbasaur, "HPBar",  {width: '100%'})
                 Vue.set(Bulbasaur, "maxHP",  Bulbasaur.hp)
                 Vue.set(Bulbasaur, "HPlimit", Bulbasaur.hp*1.2)
                 Vue.set(Bulbasaur, "maxATK",  Bulbasaur.atk*1.2)
-                Vue.set(Bulbasaur, "maxDEF",  Bulbasaur.def*1.2)
-                console.log("Print bulbasur -------------")
-                console.log(Bulbasaur)
+                Vue.set(Bulbasaur, "maxDEF",  Bulbasaur.def*1.2)                
+
                 const resC= await axios.get('/api/pokemon/4')
                 let Charmander = resC.data.data
                 
@@ -109,6 +108,7 @@ methods: {
                 Vue.set(Charmander, "HPlimit", Charmander.hp*1.2)
                 Vue.set(Charmander, "maxATK",  Charmander.atk*1.2)
                 Vue.set(Charmander, "maxDEF",  Charmander.def*1.2)
+
                 const resS = await axios.get('/api/pokemon/'+7)
                 let Squirtle = resS.data.data
                 console.log(Squirtle)
@@ -166,6 +166,7 @@ methods: {
       async SetFirstPokemon(id){
         await axios.post('/api/setPokemon/'+id)  
         console.log('added') 
+        localStorage.setItem("hasP", true);
         return user.dispatch('getUser');
            
       },

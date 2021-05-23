@@ -3,7 +3,6 @@
 <div id="home">
 
  <div class="main">
-   <span v-if="$store.state.auth">
 
 <section id="carrusel" class="zpos" >      
   <div id="demo" class="carousel slide" data-ride="carousel">
@@ -57,9 +56,6 @@
   
       
 </section>
-
-   </span>
-   <h1 v-else> You are not logged in! <br><router-link to="login">Sign in!</router-link></h1>
    
  </div>
  <div class="text" v-if="gameplay">

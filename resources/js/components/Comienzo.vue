@@ -14,7 +14,7 @@
 <div class="chooseOne">
   <div class="center">
 
-    <router-link class="router" to="/tutorial/Bulbasaur">
+    <router-link class="router" to="Bulbasaur">
     <div @click="isBulbasaur" class="card starting carta">
       <img class="card-img-top" :src="Bulbasaur.image_path" alt="bulbasaur">
       <span class="card-name">{{Bulbasaur.name}}</span>
@@ -25,7 +25,7 @@
     </div>
     </router-link>
 
-    <router-link class="router" to="/tutorial/Charmander">
+    <router-link class="router" to="Charmander">
     <div @click="isCharmander" class="card starting carta">
       <img class="card-img-top" :src="Charmander.image_path" alt="charmander">
       <span class="card-name"><img class="types-icon" :src="IconsPath+'Fire.png'" /> 
@@ -38,7 +38,7 @@
     </div>
     </router-link>
     
-    <router-link class="router" to="/tutorial/Squirtle">
+    <router-link class="router" to="Squirtle">
     <div @click="isSquirtle" class="card starting carta">
       <img class="card-img-top" :src="Squirtle.image_path" alt="squirtle">
       <span class="card-name">{{Squirtle.name}}</span>

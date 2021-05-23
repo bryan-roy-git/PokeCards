@@ -222,16 +222,6 @@ export default {
 	width: 100%;
   }
  
-  .container{
-	min-width: 250px;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color:#f1f1f1;
-	margin-top: 2vh;
-  }
- 
   button {
 	background-color: #4CAF50;
 	border-radius: 1vh;

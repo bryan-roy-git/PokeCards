@@ -37,7 +37,9 @@ const router = new VueRouter({
         { path: '/register', component:  RegistroComponent, name: 'register', meta: { requiresVisitor: true }},
         { path: '/login', component:  LoginController , name: 'login', meta: { requiresVisitor: true }},
         { path: '/', name: 'base', component: () => import(/* webpackChunkName: "Raiz" */"../components/Home.vue")},
-        { path: '/tutorial/:pokemon',  name: 'tutorial', component: Tutorial, meta: { requiresAuth: true, requiresNoPokemon: true } },
+        { path: '/Squirtle',  name: 'Squirtle', component: Tutorial, meta: { requiresAuth: true, requiresNoPokemon: true } },
+        { path: '/Bulbasaur',  name: 'Bulbasaur', component: Tutorial, meta: { requiresAuth: true, requiresNoPokemon: true } },
+        { path: '/Charmander',  name: 'Charmander', component: Tutorial, meta: { requiresAuth: true, requiresNoPokemon: true } },
         { path: '/home', name: 'home', component: Home , meta: { requiresAuth: true }},
         { path: '/forgot', name: 'forgot',  component: Forgot , meta: { requiresVisitor: true }},
         { path: '/reset/:token', name: 'reset', component: Reset,  meta: { requiresVisitor: true }},
@@ -77,16 +79,18 @@ router.beforeEach( (to, from, next) => {
       } else {
         next()
       }
-  }
-    else if (to.matched.some(record => record.meta.requiresNoPokemon)) {
-      if (store.getters.hasPokemon) {
-        next('home')
-      } else {
-        next()
-      }
 
   } else {
     next()
+  }
+
+  if (to.matched.some(record => record.meta.requiresNoPokemon)) {
+
+    if (localStorage.getItem('hasP')) {
+      next('home')
+    } else {
+      next()
+    }
   }
   
 });   
