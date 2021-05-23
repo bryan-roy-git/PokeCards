@@ -79,7 +79,7 @@ router.beforeEach( (to, from, next) => {
     return pokes;
   }
 
-  this.userPokes()
+  userPokes()
 
   if (to.matched.some(record => record.meta.requiresAuth)) {  
         
