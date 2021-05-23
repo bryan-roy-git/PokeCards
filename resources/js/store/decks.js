@@ -53,6 +53,10 @@ export default new Vuex.Store({
             }
             commit('SET_SHOWPOKES', user_cards)
         },
+        async clearPokes({commit}){
+          
+            commit('SET_SHOWPOKES', [])
+        },
 
 
         async showDeck({commit},id){

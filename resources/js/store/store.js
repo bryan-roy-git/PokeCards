@@ -57,6 +57,7 @@ export default new Vuex.Store({
         
         async login ({ dispatch },credentials) {
             await axios.get('/sanctum/csrf-cookie') //await = espera a que termine la primera peticion
+            console.log(credentials, 'credentials')
             const log= await axios.post('login',credentials)
             if (log.data.nick!=null){
                 localStorage.setItem("who", true);

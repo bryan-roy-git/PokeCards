@@ -59,14 +59,20 @@ export default {
             try{
               console.log(this.form.email)
               await this.$store.dispatch('login',this.form)
+              const res = await axios.post('login',{
+                email: this.email,
+                password: this.password,
+            })
               this.$awn.success("Welcome")
               console.log("NewVersion")
               if (res.data.pokemons == null){
-                console.log(res.data.pokemons, 'hasPokes?')
+                       console.log(res.data.pokemons, 'hasPokes?')
+                        this.$store.dispatch('clearPokes')
+                       this.$store.dispatch('getDecks')
                 return this.$router.push('starting');
               } else{
+                       this.$store.dispatch('clearPokes')
                        this.$store.dispatch('getDecks')
-                       this.$store.state.pokes
                   return this.$router.push('home');
               }
 
