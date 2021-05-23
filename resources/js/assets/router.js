@@ -63,6 +63,24 @@ const router = new VueRouter({
 
 router.beforeEach( (to, from, next) => {
 
+  async function userPokes() {
+    const pokes = await axios.get('api/pokesUser')
+    if (to.matched.some(record => record.meta.requiresNoPokemon)) {
+
+      console.log(pokes)
+     
+      if (pokes!=null) {
+        next('home')
+      } else {
+        next()
+      }
+    }
+    
+    return pokes;
+  }
+
+  this.userPokes()
+
   if (to.matched.some(record => record.meta.requiresAuth)) {  
         
       if (!localStorage.getItem('who')){
@@ -82,22 +100,8 @@ router.beforeEach( (to, from, next) => {
     next()
   }
   
-  async function userPokes() {
-    const pokes = await axios.get('api/pokesUser')
-    return pokes;
-  }
 
-  if (to.matched.some(record => record.meta.requiresNoPokemon)) {
-
-    console.log(pokes)
-   
-    if (userPokes()!=null) {
-      next('home')
-    } else {
-      next()
-    }
-  }
-  
+ 
 });   
 
 export default router
