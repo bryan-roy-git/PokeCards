@@ -135,13 +135,7 @@ class UserController extends Controller{
             // dd($pokes_id[$x]["id"]);
             array_push($ids, $pokes_id[$x]["id"]);
         }
-        // dd($ids);
 
-        
-        
-        
-
-        
         $id=\Auth::user()->id;
         $user=User::where('id',$id)->first();
 
@@ -160,7 +154,6 @@ class UserController extends Controller{
             }
             $user->pokemons = serialize($new_array);
         }
-        // dd($user,$shop);
         
         $user->save();
         
@@ -168,8 +161,6 @@ class UserController extends Controller{
         $this->resetCart();
 
         return "Compra realizada correctamente";
-        // dump($user);
-        // dd($user);
     }
 
 

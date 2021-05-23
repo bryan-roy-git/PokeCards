@@ -94,6 +94,7 @@ methods: {
         async getPokeData(){
                 const resB = await axios.get('/api/pokemon/1')
                 let Bulbasaur = resB.data.data
+
                 Vue.set(Bulbasaur, "HPBar",  {width: '100%'})
                 Vue.set(Bulbasaur, "maxHP",  Bulbasaur.hp)
                 Vue.set(Bulbasaur, "HPlimit", Bulbasaur.hp*1.2)
@@ -111,7 +112,7 @@ methods: {
 
                 const resS = await axios.get('/api/pokemon/'+7)
                 let Squirtle = resS.data.data
-                console.log(Squirtle)
+              
                 Vue.set(Squirtle, "HPBar",  {width: '100%'})
                 Vue.set(Squirtle, "maxHP",  Squirtle.hp)
                 Vue.set(Squirtle, "HPlimit", Squirtle.hp*1.2)
@@ -120,9 +121,8 @@ methods: {
 
           if (this.player.name == "Bulbasaur"){
                 this.player=Bulbasaur
-                console.log(Bulbasaur)
                 this.opponent = Charmander
-                console.log(Charmander)
+           
 
           } else if (this.player.name == 'Charmander'){
                 this.player = Charmander
@@ -140,7 +140,7 @@ methods: {
           this.options = false
           this.matchEnded = true;
           if (this.player.hp==0){
-            console.log(this.player.id, 'setRewards')
+            console.log('rewarded')
             this.SetFirstPokemon(this.player.id);
             this.SetCreateFirstDeck()
             setTimeout(() => {this.battleText = "You have no more cards left!"},2000)
@@ -165,8 +165,7 @@ methods: {
 
       async SetFirstPokemon(id){
         await axios.post('/api/setPokemon/'+id)  
-        console.log('added') 
-        localStorage.setItem("hasP", true);
+        console.log('+') 
         return user.dispatch('getUser');
            
       },
@@ -207,8 +206,6 @@ methods: {
         if (isNaN(skill)){
             if (skill=="ATK"){
               if(this.player.atk<this.player.maxATK){
-                //console.log(this.player.atk, 'atk player')
-                //console.log(this.player.maxATK, 'maxATK')
                 this.player.atk = this.player.atk*1.2
               } else{ this.maxedATK=true }
             } else if (skill=="DEF"){
@@ -268,7 +265,7 @@ opponentAttack(){
   
   var random = Math.floor((Math.random() * 4) + 1)
   var opponentSkill=this.opponent.moves[random-1].power
-  console.log(this.opponent.moves[random-1].name)
+ 
   if (isNaN(opponentSkill)){
         if (opponentSkill=="ATK"){
               if(this.opponent.atk<this.opponent.maxATK){

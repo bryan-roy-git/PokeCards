@@ -60,10 +60,7 @@ export default new Vuex.Store({
             const log= await axios.post('login',credentials)
             if (log.data.nick!=null){
                 localStorage.setItem("who", true);
-                console.log(log.data)
-                if (log.data.pokemons!=null){
-                    localStorage.setItem("hasP", true);
-                }
+ 
             } else{
                 localStorage.removeItem("who")
             }
@@ -77,7 +74,6 @@ export default new Vuex.Store({
 
         async logout ({ dispatch }) {
             localStorage.removeItem("who")
-            localStorage.removeItem("hasP")
             await axios.post('logout')
             return dispatch("getUser") // dispatch => ejecutar una accion
         },

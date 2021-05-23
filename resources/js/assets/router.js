@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from "../store/store";
+import axios from 'axios';
 
 // import ExampleComponent from '../components/ExampleComponent'
 import RegistroComponent from '../components/RegistroComponent'
@@ -21,13 +22,7 @@ import ChangePass from '../components/ChangePass';
 import ChangeProfile from '../components/ChangeProfile';
 import Decks from '../components/MiMazo';
 
-
-
-
 Vue.use(VueRouter)
-
-let auth = store.getters.isAuthenticated;
-console.log(auth, 'hi')
 
 const router = new VueRouter({
     mode:'history',
@@ -62,9 +57,12 @@ const router = new VueRouter({
     
 })
 
+
+  
+
+
 router.beforeEach( (to, from, next) => {
 
-  console.log(store.getters.isAuthenticated)
   if (to.matched.some(record => record.meta.requiresAuth)) {  
         
       if (!localStorage.getItem('who')){
@@ -84,9 +82,14 @@ router.beforeEach( (to, from, next) => {
     next()
   }
 
+  async function userPokes() {
+    const pokes = await axios.get('api/pokesUser')
+    return pokes;
+  }
+
   if (to.matched.some(record => record.meta.requiresNoPokemon)) {
 
-    if (localStorage.getItem('hasP')) {
+    if (userPokes()!=null) {
       next('home')
     } else {
       next()

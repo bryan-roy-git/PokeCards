@@ -14,11 +14,9 @@
                         {{Name}}
                     <img class="types-icon" :src="getType" />
                 </span>
-                <!--<span class="card-text">ATK: {{ATK}}</span>
-                <span class="card-text">DEF: {{DEF}}</span>
-                <span class="card-attack">SPD: {{SPD}}</span>-->
             </div>
             <div v-else-if="!notFlipped" class="card behind carta">
+                 <img class="card-img-top " style="max-width:70px; max-height:70px; min-width:70px; min-width:70px; border:none; background:transparent" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/1200px-Pok%C3%A9_Ball_icon.svg.png" :alt="Name">
                 <span class="behind-card-name">
                     <img class="types-icon" :src="getType" />
                         {{Name}}
@@ -142,4 +140,5 @@ export default {
 .im-flipped {
     transform: rotateY(180deg);
 }
+
 </style>

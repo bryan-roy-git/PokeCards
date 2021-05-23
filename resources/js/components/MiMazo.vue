@@ -139,8 +139,6 @@ export default {
         async isMain(){
              const res = await axios.get('/api/isMainDeck')
              this.main=res.data
-             console.log(this.main, 'is Main')
-             console.log(this.deckID, 'deckid' )
              
         },
 
@@ -159,7 +157,6 @@ export default {
     showDeck(id){
         this.deckID=id
         this.show=true
-         console.log(this.deckID, 'deckid' )
         decksStore.dispatch('showDeck',id)
         decksStore.dispatch('showPokes')
         

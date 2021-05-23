@@ -97,15 +97,12 @@ export default {
                 console.log("Form enviado");
                 var pemail=this.$v.form.email.$model
                 var correo=pemail.toLowerCase()
-                //console.log(correo)
                 const res= await axios.post("/api/updateEmail", {
                         email: correo,
                     })
                     
-            console.log(res.data.data);
             if (res.data.data=="exito"){
                this.emessage =""
-               console.log('Exito')
                this.$awn.success("Your email has been updated");
             } else{
                 this.emessage = res.data.email[0];
@@ -130,14 +127,12 @@ export default {
         async getNick(){
             const res=await axios.get('/api/user')
             this.form.nick=res.data.nick
-            console.log(res.data.nick)
             return res.data.nick
         },
 
         async getEmail(){
             const res=await axios.get('/api/user')
             this.form.email= res.data.email
-            console.log()
             return res.data.email
         }
     },
