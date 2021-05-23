@@ -70,7 +70,7 @@ export default {
                 return this.$router.push('starting');
               } else{
                        this.$store.dispatch('getDecks')
-                  return this.$router.push('home');
+                  return this.$router.go('home');
               }
 
             }catch{

@@ -65,21 +65,22 @@ router.beforeEach( (to, from, next) => {
 
   async function userPokes() {
     const pokes = await axios.get('api/pokesUser')
-    if (to.matched.some(record => record.meta.requiresNoPokemon)) {
-
-      console.log(pokes)
-     
-      if (pokes!=null) {
-        next('home')
-      } else {
-        next()
-      }
-    }
     
     return pokes;
   }
 
-  userPokes()
+  if (to.matched.some(record => record.meta.requiresNoPokemon)) {
+    const pokes=userPokes()
+    console.log(pokes)
+   
+    if (pokes!=null) {
+      next('home')
+    } else {
+      next()
+    }
+  }
+
+  
 
   if (to.matched.some(record => record.meta.requiresAuth)) {  
         
