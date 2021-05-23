@@ -88,9 +88,9 @@ router.beforeEach( (to, from, next) => {
     return pokes;
   }
 
-  //console.log(pokes)
+  
   if (to.matched.some(record => record.meta.requiresNoPokemon)) {
-
+    console.log(pokes)
     if (userPokes!=null) {
       next('home')
     } else {
