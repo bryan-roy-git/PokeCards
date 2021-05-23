@@ -64,7 +64,7 @@ export default {
                 password: this.password,
             })
               this.$awn.success("Welcome")
-              
+              console.log("NewVersion")
               if (res.data.pokemons == null){
                        console.log(res.data.pokemons, 'hasPokes?')
                 return this.$router.push('starting');
