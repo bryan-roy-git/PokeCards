@@ -69,18 +69,6 @@ router.beforeEach( (to, from, next) => {
     return pokes;
   }
 
-  if (to.matched.some(record => record.meta.requiresNoPokemon)) {
-    const pokes=userPokes()
-    console.log(pokes)
-   
-    if (pokes!=null) {
-      next('home')
-    } else {
-      next()
-    }
-  }
-
-  
 
   if (to.matched.some(record => record.meta.requiresAuth)) {  
         
@@ -98,8 +86,27 @@ router.beforeEach( (to, from, next) => {
       }
 
   } else {
+      if (to.matched.some(record => record.meta.requiresNoPokemon)) {
+        const pokes=userPokes()
+        console.log(pokes)
+      
+        if (pokes!=null) {
+          next('home')
+        } else {
+          next()
+        }
+      }
     next()
   }
+
+
+
+
+
+
+
+
+
   
 
  
