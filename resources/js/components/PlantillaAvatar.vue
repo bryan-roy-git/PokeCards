@@ -24,7 +24,7 @@ export default {
     },
     methods: {
       mostrar(){
-        console.log(this.choose)
+        console.log(this.choose ,'choose')
         if (!this.choose){
           this.choose=true
         } else {

@@ -28,9 +28,9 @@ class RegisterController extends ApiResponseController
         $nick=$request->all()['nick'];
         $email=$request->all()['email'];
         $password=$request->all()['password'];
+
         // $nick=$request->input('nick');
         // return $this->successResponse($nick);
-
         // dd($nick);
         if ($validator->fails()) {
             // return $validator->errors();
@@ -40,9 +40,10 @@ class RegisterController extends ApiResponseController
                 'nick' => $nick,
                 'email' => $email,
                 'password' => Hash::make($password),
+                'image' => $request->image
             ]);
             // dd($validator->validated()); 
-
+            error_log($request->image);
             return $this->successResponse("exito");
             }
         

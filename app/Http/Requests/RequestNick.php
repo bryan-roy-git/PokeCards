@@ -8,7 +8,7 @@ class RequestNick extends FormRequest
 {
     public static function myRules () {
         return [
-            'nick' => 'required|min:3|unique:users',
+            'nick' => 'required|min:3',
         ];
     }
 

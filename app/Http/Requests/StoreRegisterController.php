@@ -8,9 +8,9 @@ class StoreRegisterController extends FormRequest
 {
     public static function myRules () {
         return [
-            'nick' => 'required|min:3|unique:users',
+            'nick' => 'required|min:3',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:4',
+            'password' => 'required|min:8',
         ];
     }
 

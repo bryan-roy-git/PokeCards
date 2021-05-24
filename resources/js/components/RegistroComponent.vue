@@ -98,7 +98,7 @@ export default {
             rpassword: {
                 required,
                 sameAsPassword: sameAs('password')
-            }
+            },
         }
     },
     methods: {
@@ -130,6 +130,7 @@ export default {
                     email:email,
                     password:this.$v.form.password.$model,
                     rpassword:this.$v.form.rpassword.$model,
+                    image: this.img_name
                 }).then (response => {
                     console.log("RESPUESTA ",response.data);
                     this.resetForm();

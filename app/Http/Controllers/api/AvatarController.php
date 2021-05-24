@@ -33,6 +33,6 @@ class AvatarController extends Controller
                 'image'=>$filename
             ]);
         }
-        return response()->json(['success'=>'You have successfully upload image.']);
+        return response()->json(['success'=>'You have successfully uploaded your image.']);
     }
 }

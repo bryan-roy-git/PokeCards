@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'nick' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'password_confirm' => 'required|same:password'
+            'password_confirm' => 'required|same:password',
            
         ];
     }
