@@ -4,11 +4,11 @@
   
   <div class="battle-arena" :style=" {'background-image': 'url('+mapa+')','background-size': '100% 100%'} ">
     <div class="tutorial-card-opponent">
-    <Card  :HP="opponent.hp" :maxHP="opponent.maxHP" :Name="opponent.name" :ATK="opponent.atk" :DEF="opponent.def" :SPD="opponent.spd"
+    <Card :Attacked="attacked" :HP="opponent.hp" :maxHP="opponent.maxHP" :Name="opponent.name" :ATK="opponent.atk" :DEF="opponent.def" :SPD="opponent.spd"
      :Img="opponent.image_path" :Type="opponent.type" :Level="opponent.level" :HPBar="opponent.HPBar" ></Card>
     </div>
     <div class="tutorial-card-player">
-    <Card :HP="player.hp" :maxHP="player.maxHP" :Name="player.name" :ATK="player.atk" :DEF="player.def" :SPD="player.spd" :Img="player.image_path" 
+    <Card :OPAttacked="opAttacked" :HP="player.hp" :maxHP="player.maxHP" :Name="player.name" :ATK="player.atk" :DEF="player.def" :SPD="player.spd" :Img="player.image_path" 
           :Type="player.type" :Level="player.level" :HPBar="player.HPBar" :Player="player" :IconsPath="IconsPath"></Card>
     </div>
     
@@ -58,11 +58,11 @@ export default {
     return{
         opponent:{},
         player:{
-            name: this.$route.params,
+            name: this.$route.name,
         },
 
         IconsPath: '',
-        battleText: "What will "+ this.$route.params.pokemon+ " do?",
+        battleText: "What will "+ this.$route.name+ " do?",
         battleOptions: ["Fight", "Cards", "Item", "Run"],
         menu: 'options',
         attacks: false,
@@ -79,6 +79,9 @@ export default {
         opmaxedHP:false,
         opmaxedATK:false,
         opmaxedDEF:false,
+        attacked:false,
+        opAttacked:false,
+
     }
   },
   
@@ -132,7 +135,7 @@ methods: {
                 this.player = Squirtle
                 this.opponent = Bulbasaur
             }
-
+      
         },
 
         faintAnimation(){
@@ -226,6 +229,8 @@ methods: {
           if (realDamage<=0){
               realDamage=1
           }
+          this.attacked = true;
+          setTimeout(() => {this.attacked=false},2000)
           this.opponent.hp -= realDamage
           var percent=Math.round(this.opponent.hp/this.opponent.maxHP*100)
         }  
@@ -294,6 +299,8 @@ opponentAttack(){
           if (realDamage<=0){
             realDamage=1
           }
+          this.opAttacked = true;
+          setTimeout(() => {this.opAttacked=false},2000)
           this.player.hp -=  realDamage
           var percent=Math.round(this.player.hp/this.player.maxHP*100)
       }          

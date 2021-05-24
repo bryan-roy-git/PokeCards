@@ -121,12 +121,13 @@ export default {
             // console.log("enviar"+ this.formValidate)
             if (!this.formValidate) return; 
 
-                console.log(this.form)
+                console.log(this.form, 'this.form')
                 // console.log("Form enviado")
-                
+                var email =this.$v.form.email.$model.toLowerCase()
+
                 axios.post('api/register',{
                     nick:this.$v.form.nick.$model,
-                    email:this.$v.form.email.$model,
+                    email:email,
                     password:this.$v.form.password.$model,
                     rpassword:this.$v.form.rpassword.$model,
                 }).then (response => {

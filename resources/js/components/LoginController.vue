@@ -57,16 +57,11 @@ export default {
     methods: {
         async login () {
             try{
-              console.log(this.form.email)
+              this.form.email = this.form.email.toLowerCase()
               await this.$store.dispatch('login',this.form)
-              const res = await axios.post('login',{
-                email: this.email,
-                password: this.password,
-            })
-
-   
+              const res = await axios.get('api/pokesUser')
               this.$awn.success("Welcome")
-              if (res.data.pokemons == null){
+              if (res.data == ""){
                 return this.$router.push('starting');
               } else{
                   localStorage.setItem('length',true)

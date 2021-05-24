@@ -2,7 +2,7 @@
 <template>
 <div id="adventure">
   <div class="chooseArea">CHOOSE YOUR ADVENTURE AREA</div>
-    <div class="flex-container">
+    <div class="flex-container maps">
       <div type="button" @click="selectMap(1)" class="sewers map" name="Sewers">
         <span class="span">Sewers</span>
       </div>  
@@ -52,7 +52,7 @@ export default {
   @import "../../css/adventureMobile.css";
 
   #adventure{
-    background-color: #f6f7c7;
+    background-color: #2c3e50;
     height: fit-content;
     text-align: center;
   }
@@ -71,6 +71,11 @@ export default {
   .span:hover{
       position: relative;
       width:100%;
+  }
+
+  .maps{
+        border: 5px solid silver;
+        border-top:none;
   }
   
 

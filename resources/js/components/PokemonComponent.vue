@@ -189,7 +189,7 @@ import user from '../store/store'
             },
             cardColor(rarity){
                 if (rarity=="common"){
-                    return  {"background-image": "linear-gradient( to top left, white, yellow, white)"}
+                    return  {"background-image": "linear-gradient( to top left, white, gray, white)"}
                 }
                 else if (rarity=="rare"){
                     return  {"background-image": "linear-gradient(to top left, white, #009933 , white )"}
@@ -203,7 +203,6 @@ import user from '../store/store'
                 else if (rarity=="legend"){
                     return  {"background-image": "linear-gradient(to top left, white, orange , white )"}
                 }
-
             }
         },
 

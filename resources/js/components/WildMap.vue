@@ -3,14 +3,15 @@
 <div id="wild">  
   <div v-if="!changing" class="battle-arena" :style="{'background-image': 'url('+MapBackground+')','background-size': '100% 100%'} ">
     <div class="tutorial-card-opponent">
-      <Card :Attacked="attacked" :HP="opponent.poke.hp" :maxHP="opponent.poke.maxHP" :Name="opponent.poke.name" :ATK="opponent.poke.atk" :DEF="opponent.poke.def" :SPD="opponent.poke.spd"
-            :Type="opponent.poke.type" :Level="opponent.poke.level" :HPBar="opponent.poke.HPBar" :Img="opponent.poke.image_path" :Rarity="opponent.poke.rarity"></Card>
+      <Card :Attacked="attacked" :HP="opponent.poke.hp" :maxHP="opponent.poke.maxHP" :Name="opponent.poke.name" :ATK="opponent.poke.atk" 
+      :DEF="opponent.poke.def" :SPD="opponent.poke.spd" :Type="opponent.poke.type" :Level="opponent.poke.level" :HPBar="opponent.poke.HPBar"
+       :Img="opponent.poke.image_path" :Rarity="opponent.poke.rarity"></Card>
     </div> 
 
     <div class="tutorial-card-player">
-        <Card :HP="player.current.hp"  :maxHP="player.current.maxHP" :Name="player.current.name" :ATK="player.current.atk" :DEF="player.current.def" 
-        :SPD="player.current.spd" :Type="player.current.type" :Level="player.current.level" :HPBar="player.current.HPBar"
-        :Player="player.current" :Img="player.current.image_path" :Rarity="player.current.rarity"></Card>
+        <Card :OPAttacked="opAttacked" :HP="player.current.hp" :maxHP="player.current.maxHP" :Name="player.current.name" :ATK="player.current.atk" 
+        :DEF="player.current.def" :SPD="player.current.spd" :Type="player.current.type" :Level="player.current.level" :HPBar="player.current.HPBar"
+        :Player="player.current" :Img="player.current.image_path" :Rarity="player.current.rarity" ></Card>
     </div>
   <div class="bottom-menu">
         <div class="battle-text text-box-left">
@@ -65,6 +66,7 @@ import Card from './Card';
 import Vue from 'vue';
 import axios from 'axios';
 import user from '../store/store'
+import decks from '../store/decks'
 
 
 export default {
@@ -107,7 +109,8 @@ export default {
         opmaxedATK:false,
         opmaxedDEF:false,
         wins:false,
-        attacked:false
+        attacked:false,
+        opAttacked:false,
         //maxedSPD:false,
 
 
@@ -228,7 +231,7 @@ faintAnimation: function(){
 
         if (this.droppedPokemon != null){
            setTimeout(() => {this.battleText = "You have won "+this.coins+" PokeCoins and obtained "+this.opponent.poke.name},2000)
-           this.$store.dispatch('getDecks')
+           decks.dispatch('getDecks')
         }
         else{
            setTimeout(() => {this.battleText = "You have won "+this.coins+" PokeCoins"},2000)
@@ -383,7 +386,7 @@ selectAttack(attack) {
             if(isNaN(skill)){
               if (skill=="ATK" && this.maxedATK || skill=="DEF" && this.maxedDEF || skill=="HP" && this.maxedHP ){
                   this.battleText = this.player.current.name + " used " + this.player.current.moves[attack-1].name + "!"
-                  setTimeout(() => {this.battleText = this.player.current.name + " can't increase his "+ skill+"anymore!"}, 2000)
+                  setTimeout(() => {this.battleText = this.player.current.name + " can't increase his "+ skill+" anymore!"}, 2000)
                   setTimeout(() => {this.opponentAttack()}, 4000)
                   setTimeout(() => {this.battleText = "What will " + this.player.current.name + " do?"},6000)
 
@@ -436,8 +439,8 @@ opponentAttack(){
             realDamage=1
           }
           this.player.current.hp -=  realDamage
-          this.attacked = true;
-          setTimeout(() => {this.attacked=false},2000)
+          this.opAttacked = true;
+          setTimeout(() => {this.opAttacked=false},2000)
           var percent=Math.round(this.player.current.hp/this.player.current.maxHP*100)
       }
           
@@ -454,7 +457,7 @@ opponentAttack(){
              
              if (opponentSkill=="ATK" && this.opmaxedATK || opponentSkill=="DEF" && this.opmaxedDEF || opponentSkill=="HP" && this.opmaxedHP ){
                   this.battleText = this.opponent.poke.name + " used " + this.opponent.poke.moves[random-1].name + "!"
-                  setTimeout(() => {this.battleText = this.opponent.poke.name + " can't increase his "+ opponentSkill+"anymore!"}, 2000)
+                  setTimeout(() => {this.battleText = this.opponent.poke.name + " can't increase his "+ opponentSkill+" anymore!"}, 2000)
                   setTimeout(() => { this.options = true, this.disabledOptions = false},4000)
                   setTimeout(() => {this.battleText = "What will " + this.player.current.name + " do?"},4000)  
               } else{

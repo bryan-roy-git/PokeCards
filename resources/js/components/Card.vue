@@ -55,7 +55,8 @@ export default {
         HpBar: {},
         maxHP: {},
         Rarity:{},
-        Attacked:{}
+        Attacked:{},
+        OPAttacked:{}
     },
     computed: {
             HPStyle(){    
@@ -75,8 +76,7 @@ export default {
                     return {
                         width: '100%',
                         background: 'none',
-                        border: "none",
-                        
+                        border: "none",                
                     }
 
                 } else {
@@ -93,7 +93,13 @@ export default {
                     return this.HP > 0;
                 },
                 getType(){
-                    setTimeout(() => { this.IPath= this.IconsPath+this.Type+'.png'},350)
+                    if (this.Type == undefined){
+                        console.log('')
+                    }
+                    else{
+                         this.IPath= this.IconsPath+this.Type+'.png'
+                    }
+                    
                 return this.IPath
             },
              cardColor(){
@@ -117,8 +123,14 @@ export default {
             },
 
             vibrar(){
-                if (this.Attacked){
+                if (this.Attacked & !this.Player){
                     return {
+                           animation: 'shake 0.5s',
+                           'animation-iteration-count': '1'
+                    }
+                }
+                else if(this.OPAttacked){
+                     return {
                            animation: 'shake 0.5s',
                            'animation-iteration-count': '1'
                     }
@@ -148,11 +160,6 @@ export default {
 
 <style lang="css">
 @import "../../css/cards.css";
-
-.vibrar{
-  animation: shake 0.5s;
-  animation-iteration-count: 1;
-}
 
 @keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }

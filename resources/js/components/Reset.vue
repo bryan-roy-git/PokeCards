@@ -21,14 +21,7 @@
         </div>
     
         <button type="submit" class="registerbtn">Reset</button>
-        <hr>
-        <div class="requirements">
-          Password: Must have at least 8 characters<br>
-          Confirm password: Must be the same as Password
-        </div>
-
     </form>
-
   </div>   
 </div>
 </template>
