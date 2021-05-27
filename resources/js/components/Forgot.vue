@@ -51,7 +51,7 @@ export default {
                 required,
                 email
             },
-        }
+        } 
    }, 
 
    methods: {
@@ -60,10 +60,15 @@ export default {
          console.log(this.$v.form.email.$model)
          var email =this.$v.form.email.$model.toLowerCase()
          console.log(email)
-          await axios.post('forgot',{ email: email });
-
-          this.message='The email was sent!';
-          this.error='';
+         const res = await axios.post('forgot',{ email: email });
+          console.log(res.data)
+          if (res.data.message=="User doesn't exist"){
+            this.error="User doesn't exist"
+            this.message=''; 
+          } else{
+              this.message='The email was sent!';
+              this.error='';
+          }        
 
         } catch (error) {
           //this.error = 'The email must be a valid email address'
