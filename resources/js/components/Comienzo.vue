@@ -56,6 +56,8 @@
 <script>
 //import axios from 'axios';
 import $ from 'jquery';
+import store from '../store/store'
+import axios from 'axios';
 
 $(document).ready(function () {
   //Desactiva cortar, copiar y pegar
@@ -84,15 +86,17 @@ export default {
     }
   },
   mounted(){
+    //console.log(store.state.user)
     this.getPokeData()
+    
   },
   methods:{
     async getPokeData(){
                 const resB = await axios.get('/api/pokemon/1')
-                console.log(resB)
-                console.log(resB.data)
+                //console.log(resB)
+                //console.log(resB.data)
                 this.Bulbasaur = resB.data.data
-                console.log(this.Bulbasaur)
+                //console.log(this.Bulbasaur)
 
                 const resC= await axios.get('/api/pokemon/4')
                 this.Charmander = resC.data.data
@@ -112,14 +116,28 @@ export default {
       return this.pokemon = 'Squirtle'
     }
   },
-  beforeRouteLeave (to, from, next) {
-			this.$dialog.confirm('Are you sure you want to pick '+this.pokemon+'?')
-			.then(function () {
-				next();
-			})
-			.catch(function () {
-				next(false);
-			});
+  async beforeRouteLeave (to, from, next) {
+      const res = axios.get('api/pokesUser')
+      .then(res => {
+        console.log(res.data)
+        if (res.data == null){
+          console.log(res.data)
+        } else{
+              const pokes = res.data
+              if (pokes.length>0){
+                  next();
+              }else {
+                  this.$dialog.confirm('Are you sure you want to pick '+this.pokemon+'?')
+                  .then(function () {
+                  next();
+                  })
+                  .catch(function () {
+                    next(false);
+                  });
+              } 
+        }
+      })
+       		
 		},
 
     

@@ -84,12 +84,29 @@ router.beforeEach( (to, from, next) => {
   }
 
 if (to.matched.some(record => record.meta.requiresNoPokemon)) {
+  const url = '/api/pokesUser';
+  // ✅ Routing has not changed at all yet, still looking at last view
+  axios.get(url).then(res => {
+    // ✅ async request complete, still haven't changed views
+    // Now test the result in some way
+    if (res.data.length <= 0) {  
+      // Passed the test.  Carry on with routing
+      next(vm => {
+        vm.myData = res.data; // Setting a property before the component loads
+      })
+    } else {
+      // Didn't like the result, redirect
+      next('/home')
+    }
+  })
 
-  if (localStorage.getItem('length')) {
-    next('home')
-  } else {
+/*
+  if (!localStorage.getItem('length')) {
     next()
+  } else {
+    next('home')
   }
+*/
 }
 
  

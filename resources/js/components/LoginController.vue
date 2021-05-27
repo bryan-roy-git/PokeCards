@@ -39,6 +39,7 @@
 <script>
 import axios from 'axios'
 axios.defaults.withCredentials = true
+import store from '../store/store'
 export default {
 
     data: () => ({
@@ -64,7 +65,7 @@ export default {
               if (res.data == ""){
                 return this.$router.push('starting');
               } else{
-                  localStorage.setItem('length',true)
+                  //localStorage.setItem('length',true)
                   return this.$router.push('home');
               }
 
@@ -74,9 +75,11 @@ export default {
             }
         }
     },
-    mounted(){
-
-    }
+      mounted(){
+    //store.dispatch('getUser')
+    //console.log(store.state.user)
+    
+  },
 }
 </script>
 <style lang="scss">
