@@ -317,7 +317,7 @@ export default {
     position: sticky;
     width: 15%;
     min-width: 240px;
-    max-width: 240px;
+    max-width: none;
     background-color: #343a40;
     border: 5px solid silver;
     border-top:none;

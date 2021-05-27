@@ -84,6 +84,7 @@ import BaulComponent from './Carrito';
     border: 5px solid silver;
     border-top:none;
     width: 70%;
+    max-width: none;
 }
 .baul{
     border: 5px solid silver;
