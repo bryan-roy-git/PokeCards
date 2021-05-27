@@ -17,7 +17,7 @@
     <!-- The slideshow -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="https://cdn.alfabetajuega.com/wp-content/uploads/2019/12/Zapdos-3-1280x720-780x405.jpg" alt="1">
+        <img class="zapdos" src="https://cdn.alfabetajuega.com/wp-content/uploads/2019/12/Zapdos-3-1280x720-780x405.jpg" alt="1">
         <div class="carousel-caption trickcenter">
           <div>
             <button class="plusButtonCarousel" v-on:click="mostrarToast()"><span id="bt">Gameplay</span></button>
@@ -59,13 +59,15 @@
    
  </div>
  <div class="text" v-if="gameplay">
-   <div class="cabecera"><span class="title">¡Welcome to PokeCards!</span><br><button class="butin" v-on:click="cerrar()">X</button></div>
-   <p>Our web aplication is based on the classic games of the Pokémon franchise, where we a cabo una atrevida apuesta mediante la implementación de batallas a través del uso de cartas; cada una de ellas corresponde a un pokémon, con un tipo y un rango de nivel de evolución prederteminado. </p><br>
-   <p>También hemos diseñado una jugosa tienda de pokémons a través del sistema de "coins" que se desarrolla en función del resultado de las batallas a modo de ganancia.</p>
+   <div class="cabecera"><span class="title">¡Welcome to PokeCards!</span><br></div>
+   <p>Our web application is a card collection game with a battle system based on the classic games of the Pokémon franchise, where our players battle throught the use of a deck of their choice;  </p><br>
+   <p>We have also designed a juicy pokecards Shop where with the pokeCoins gained in the offline battles you can buy and obtain your favorite pokecards!</p>
    <br>
-   <p>El jugador dispone de un modo de batalla of-line y online y un apartado de "decks" donde puede organizar a los miembros del equipo que luchará por él en cada batalla.</p>
-    <br>
-    <p>¡Esperemos que os guste!</p>
+   <p>Our players right now have an offline battle mode where to enjoy a 1 vs 1 turn based fight with a chance of dropping the opponent pokemon!  <br>
+      They also have a place where to create and customize their decks!
+      In the future we are thinking of implementing online battles with a pointbased ranking system where the top scorers can obtain juicy rewards! </p>
+   
+    <p>We hope you like it!</p>
    </div>
 
 </div>
@@ -173,9 +175,10 @@ export default {
     color: rgb(248, 247, 247);
     padding: 10px 20px;
     border: solid 1px white;
-    top: 69px;
+    top: 20vh;
     
   }
+
 
   #bt {
      color:white;
