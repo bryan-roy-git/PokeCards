@@ -60,7 +60,7 @@
  </div>
  <div class="text" v-if="gameplay">
    <div class="cabecera"><span class="title">¡Welcome to PokeCards!</span><br><button class="butin" v-on:click="cerrar()">X</button></div>
-   <p>Nuestro juego se basa en el clásico y mítico concepto de la franquicia Pokémon, para llevar a cabo una atrevida apuesta mediante la implementación de batallas a través del uso de cartas; cada una de ellas corresponde a un pokémon, con un tipo y un rango de nivel de evolución prederteminado. </p><br>
+   <p>Our web aplication is based on the classic games of the Pokémon franchise, where we a cabo una atrevida apuesta mediante la implementación de batallas a través del uso de cartas; cada una de ellas corresponde a un pokémon, con un tipo y un rango de nivel de evolución prederteminado. </p><br>
    <p>También hemos diseñado una jugosa tienda de pokémons a través del sistema de "coins" que se desarrolla en función del resultado de las batallas a modo de ganancia.</p>
    <br>
    <p>El jugador dispone de un modo de batalla of-line y online y un apartado de "decks" donde puede organizar a los miembros del equipo que luchará por él en cada batalla.</p>

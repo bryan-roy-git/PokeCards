@@ -243,7 +243,8 @@ import user from '../store/store'
     width: 100%;
     align-content: center;
     margin-top: 50px;
-    margin-left:50px
+    margin-left:50px;
+    max-width:95%
     /* background: black; */
 }
 
