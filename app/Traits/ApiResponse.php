@@ -5,12 +5,12 @@ namespace App\Traits;
 trait ApiResponse{
 
     public function successResponse($data, $code = 200, $msj = ' '){
-        return response()->json(array("data" => $data, "code" => $code, "msj" => $msj), $code);
+        return response()->json(array("error" => false, "data" => $data, "code" => $code, "msj" => $msj), $code);
     }
 
-    public function errorResponse($data, $code = 500, $msj = '')
+    public function errorValidateResponse($data, $code = 400, $msj = '')
     {
-        return response()->json(array("data" => $data, "code" => $code, "msj" => $msj), $code);
+        return response()->json(array("error" => true, "data" => $data, "code" => $code, "msj" => $msj), $code);
     }
 
 }
